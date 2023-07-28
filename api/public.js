@@ -14,7 +14,9 @@ export const getAllGPUs = () => {
 export const getAllDisks = () => {
   return axios.get("/disks");
 };
-
+export const getAllRelations = () => {
+  return axios.get("/cpuDiskRelations");
+};
 export const getAllRAMs = () => {
   return axios.get("/rams");
 };

@@ -19,8 +19,9 @@ const ItemForm = ({
   const ID = data[primaryKeyName];
 
   const isEditForm = !!Object.values(data).length;
-  const { register, handleSubmit, getValues, setValue, watch } = useForm({
+  const { register, handleSubmit, getValues, setValue, watch, formState: { errors } } = useForm({
     values: data,
+    mode: "all"
   });
 
   const onSubmit = (data) => {
@@ -32,12 +33,13 @@ const ItemForm = ({
     }
   };
 
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {fields.map((field) => (
         <FormInput
           register={register}
+          isEdit={isEditForm}
+          errors={errors}
           getValues={getValues}
           setValue={setValue}
           watch={watch}
