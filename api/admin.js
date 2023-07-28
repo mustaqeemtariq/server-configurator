@@ -41,11 +41,19 @@ export const createDisk = (data) => {
 export const editDisk = (id, data) => {
   return api.patch(`/disk/${id}`, data, getAuthHeaders());
 };
-
 export const deleteDisk = (id) => {
   return api.delete(`/disk/${id}`, getAuthHeaders());
 };
-
+// Relation
+export const createRelation = (data) => {
+  return api.post("/cpuDiskRelation", data, getAuthHeaders());
+};
+export const editRelation = (id, data) => {
+  return api.patch(`/cpuDiskRelation/${id}`, data, getAuthHeaders());
+};
+export const deleteRelation = (id) => {
+  return api.delete(`/cpuDiskRelation/${id}`, getAuthHeaders());
+};
 // RAM
 export const createRAM = (data) => {
   return api.post("/ram", data, getAuthHeaders());

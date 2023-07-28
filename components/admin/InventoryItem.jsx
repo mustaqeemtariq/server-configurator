@@ -39,6 +39,9 @@ const InventoryItem = ({
     const response = await create(data);
     if (response.status === 201) {
       setSelectedItem(null);
+      toast.success(response.data.message)
+    }else{
+      toast.error(response.data.message)
     }
   };
   const editItem = async (id, data) => {
@@ -46,6 +49,8 @@ const InventoryItem = ({
     if (response.status === 200) {
       setSelectedItem(null);
       toast.success(response.data.message)
+    }else{
+      toast.error(response.data.message)
     }
   };
   const deleteItem = async (id) => {
@@ -53,6 +58,8 @@ const InventoryItem = ({
     if (response.status === 200) {
       setSelectedItem(null);
       toast.success(response.data.message)
+    }else{
+      toast.error(response.data.message)
     }
   };
 

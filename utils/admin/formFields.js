@@ -235,6 +235,19 @@ export const DISK_FORM_FIELDS = [
   },
 ];
 
+export const RELATION_FORM_FIELDS = [
+  {
+    name: "cpu_id",
+    label: "CPU ID",
+    type: "text",
+  },
+  {
+    name: "disk_id",
+    label: "Disk ID",
+    type: "text",
+  }
+];
+
 export const RAM_FORM_FIELDS = [
   // {
   //   name: "ram_id",

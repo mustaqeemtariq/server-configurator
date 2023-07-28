@@ -23,6 +23,9 @@ import {
   editOrder,
   editRAM,
   editUplink,
+  createRelation,
+  editRelation,
+  deleteRelation,
 } from "@api/admin";
 import {
   CPU_TABLE_HEADERS,
@@ -31,6 +34,7 @@ import {
   ORDER_TABLE_HEADERS,
   OS_TABLE_HEADERS,
   RAM_TABLE_HEADERS,
+  RELATION_TABLE_HEADERS,
   UPLINK_TABLE_HEADERS,
 } from "@utils/admin/tableHeaders";
 import {
@@ -40,6 +44,7 @@ import {
   ORDER_FORM_FIELDS,
   OS_FORM_FIELDS,
   RAM_FORM_FIELDS,
+  RELATION_FORM_FIELDS,
   UPLINK_FORM_FIELDS,
 } from "@utils/admin/formFields";
 import {
@@ -50,6 +55,7 @@ import {
   getAllOrders,
   getAllRAMs,
   getAllUplinks,
+  getAllRelations,
 } from "@api/public";
 
 const INVENTORY_TYPE_COMPONENT_MAP = {
@@ -90,6 +96,19 @@ const INVENTORY_TYPE_COMPONENT_MAP = {
       create={createDisk}
       edit={editDisk}
       destroy={deleteDisk}
+    />
+  ),
+  [INVENTORY_TYPES.RELATION]: () => (
+    <InventoryItem
+      title="CPU-DISK"
+      primaryKeyName="relation_id"
+      tableHeaders={RELATION_TABLE_HEADERS}
+      formFields={RELATION_FORM_FIELDS}
+      jsonFields={[]}
+      getAll={getAllRelations}
+      create={createRelation}
+      edit={editRelation}
+      destroy={deleteRelation}
     />
   ),
   [INVENTORY_TYPES.RAM]: () => (

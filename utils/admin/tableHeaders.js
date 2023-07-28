@@ -92,6 +92,25 @@ export const DISK_TABLE_HEADERS = [
   },
 ];
 
+
+export const RELATION_TABLE_HEADERS = [
+  {
+    name: "relation_id",
+    label: "ID",
+    size: 2,
+  },
+  {
+    name: "cpu_id",
+    label: "CPU ID",
+    size: 2,
+  },
+  {
+    name: "disk_id",
+    label: "Disk ID",
+    size: 2,
+  }
+];
+
 export const RAM_TABLE_HEADERS = [
   {
     name: "ram_id",
