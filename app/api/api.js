@@ -7,7 +7,6 @@ const api = axios.create({
 const getAllCPUs = async () => {
     try{
         const response = await api.get('/cpus');
-        // console.log(response.data);
         return response.data;
     }
     catch(error){
@@ -19,7 +18,6 @@ const getAllCPUs = async () => {
 const getAllOSs = async () => {
     try{
         const response = await api.get('/os');
-        // console.log(response.data);
         return response.data;
     }
     catch(error){
@@ -57,7 +55,6 @@ const getCpuDataByName = async(id) => {
     try{
         const response = await api.get('/cpus');
         const filterdResponse = response.data.filter((item) => item.company === id);
-        // console.log(filterdResponse);
         return filterdResponse;
     }
     catch(error){
@@ -83,7 +80,6 @@ const getAllDisk = async(id) => {
     try{
         const response = await api.get('/disks');
         const filteredData = response.data.filter((item) => item.cpu_id === id);
-        // console.log(filteredData);
         return filteredData;
     }
     catch(error){

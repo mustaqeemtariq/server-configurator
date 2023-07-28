@@ -38,12 +38,18 @@ const InventoryItem = ({
 
   const createItem = async (data) => {
     const response = await create(data);
-    if (response.status === 201) {
+    if (response.status === 201 || response.status === 207) {
       setSelectedItem(null);
       toast.success(response.data.message);
-    } else {
-      toast.error(response.data.message);
+    }else {
+      toast.error(
+        title === "CPU-DISK"
+          ? response.data.errors[0].error
+          : response.data.message,
+        { style: { width: "500px" } }
+      );
     }
+    
   };
   const editItem = async (id, data) => {
     const response = await edit(id, data);
@@ -137,8 +143,8 @@ const InventoryItem = ({
         />
       </ItemModal>
       <ToastContainer
-        position="top-right"
-        hideProgressBar={true}
+        position="top-center"
+        hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={true}
         closeButton={true}
@@ -146,7 +152,8 @@ const InventoryItem = ({
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme="light"
+        style={{ zIndex: "99", width: "450px" }}
       />
     </div>
   );

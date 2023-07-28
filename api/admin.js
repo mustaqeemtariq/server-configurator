@@ -1,6 +1,5 @@
 import { getAuthHeaders } from "@utils/api";
 import axios from "axios";
-import { toast } from "react-hot-toast";
 
 const api = axios.create({
   baseURL: "http://134.255.253.170:5000/api",
@@ -46,7 +45,8 @@ export const deleteDisk = (id) => {
 };
 // Relation
 export const createRelation = (data) => {
-  return api.post("/cpuDiskRelation", data, getAuthHeaders());
+  return api.post("/cpuDiskRelation", data, getAuthHeaders())
+  .catch(err => err.response)
 };
 export const editRelation = (id, data) => {
   return api.patch(`/cpuDiskRelation/${id}`, data, getAuthHeaders());
