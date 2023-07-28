@@ -73,12 +73,12 @@ export const DISK_TABLE_HEADERS = [
   {
     name: "diskType",
     label: "Disk Type",
-    size: 1,
+    size: 2,
   },
   {
     name: "storage_size",
     label: "Storage Size",
-    size: 1,
+    size: 2,
   },
   {
     name: "storage_unit",
@@ -154,17 +154,17 @@ export const OS_TABLE_HEADERS = [
   {
     name: "os_id",
     label: "ID",
-    size: 1,
+    size: 2,
   },
   {
     name: "os_name",
     label: "Name",
-    size: 2,
+    size: 3,
   },
   {
     name: "units_left",
     label: "Quantity",
-    size: 1
+    size: 2
   }
   // {
   //   name: "os_version",
@@ -177,7 +177,7 @@ export const UPLINK_TABLE_HEADERS = [
   {
     name: "uplink_id",
     label: "ID",
-    size: 1,
+    size: 2,
   },
   {
     name: "transfer_speed",
@@ -187,7 +187,7 @@ export const UPLINK_TABLE_HEADERS = [
   {
     name: "data_unit",
     label: "Data Unit",
-    size: 1
+    size: 2
   }
 ];
 

@@ -130,7 +130,7 @@ export const INVENTORY_TYPES = {
   CPU: "cpu",
   GPU: "gpu",
   DISK: "disk",
-  RELATION: "relation",
+  RELATION: "cpu-disk relation",
   UPLINK: "uplink",
   RAM: "ram",
   OS: "os",
