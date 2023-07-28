@@ -73,6 +73,9 @@ const SelectDisk = () => {
   const hddLimit = cpu?.selectedCPU?.hdd_disk_limit;
   const ssdLimit = cpu?.selectedCPU?.ssd_disk_limit;
 
+  console.log("HDD", hddLimit);
+
+
   return (
     <section>
       <div className="max-h-96 overflow-y-auto mx-auto bg-gray-50 border border-sky-400 shadow-lg rounded-lg">
@@ -93,7 +96,7 @@ const SelectDisk = () => {
               <DiskItem
                 key={item.ram_id}
                 data={item.disk_inventory}
-                limit={item.diskType === "SATA" ? hddLimit : ssdLimit}
+                limit={item.disk_inventory.diskType === "SATA" ? hddLimit : ssdLimit}
               />
             ))}
           </div>
