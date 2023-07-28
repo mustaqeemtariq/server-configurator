@@ -19,7 +19,6 @@ export const jsonStringifyFormData = (data, keysToParse) => {
       }
     }
   }
-  console.log("DATA", data);
   return data;
 };
 

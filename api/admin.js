@@ -1,6 +1,5 @@
 import { getAuthHeaders } from "@utils/api";
 import axios from "axios";
-import { toast } from "react-hot-toast";
 
 const api = axios.create({
   baseURL: "http://134.255.253.170:5000/api",
@@ -41,11 +40,20 @@ export const createDisk = (data) => {
 export const editDisk = (id, data) => {
   return api.patch(`/disk/${id}`, data, getAuthHeaders());
 };
-
 export const deleteDisk = (id) => {
   return api.delete(`/disk/${id}`, getAuthHeaders());
 };
-
+// Relation
+export const createRelation = (data) => {
+  return api.post("/cpuDiskRelation", data, getAuthHeaders())
+  .catch(err => err.response)
+};
+export const editRelation = (id, data) => {
+  return api.patch(`/cpuDiskRelation/${id}`, data, getAuthHeaders());
+};
+export const deleteRelation = (id) => {
+  return api.delete(`/cpuDiskRelation/${id}`, getAuthHeaders());
+};
 // RAM
 export const createRAM = (data) => {
   return api.post("/ram", data, getAuthHeaders());

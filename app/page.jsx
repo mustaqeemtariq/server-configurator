@@ -44,7 +44,6 @@ import useConfiguratorSelection from "@components/YourSelection/useConfiguratorS
 import { createCheckout } from "@api/admin";
 import { Spinner } from "@animation/spinner";
 import { containsOnlyDigits } from "@utils/strings";
-import { toast } from "react-hot-toast";
 import { jsonStringifyFormData } from "@utils/admin/utils";
 
 const Home = () => {
