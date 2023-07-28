@@ -45,6 +45,8 @@ import { createCheckout } from "@api/admin";
 import { Spinner } from "@animation/spinner";
 import { containsOnlyDigits } from "@utils/strings";
 import { jsonStringifyFormData } from "@utils/admin/utils";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const {
@@ -133,7 +135,7 @@ const Home = () => {
         comments: remarks,
       };
       createCheckout(jsonStringifyFormData(data, ["disks"])).then((res) => {
-        toast.success("Order placed successfully");
+        toast.success(res.data.message);
         setEmail("");
         setCustomer("");
       });
@@ -171,6 +173,19 @@ const Home = () => {
 
   return (
     <div className="px-4">
+       <ToastContainer
+        position="top-center"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        closeButton={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        style={{ zIndex: "99", width: "450px" }}
+      />
       <div className={clsx("fixed left-1/2 top-1/2", !loading && "hidden")}>
         <Spinner className="h-12 w-12 animate-spin" />
       </div>
