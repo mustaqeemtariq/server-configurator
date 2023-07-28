@@ -41,7 +41,8 @@ export const editDisk = (id, data) => {
   return api.patch(`/disk/${id}`, data, getAuthHeaders());
 };
 export const deleteDisk = (id) => {
-  return api.delete(`/disk/${id}`, getAuthHeaders());
+  return api.delete(`/disk/${id}`, getAuthHeaders())
+  .catch(err => err.response)
 };
 // Relation
 export const createRelation = (data) => {

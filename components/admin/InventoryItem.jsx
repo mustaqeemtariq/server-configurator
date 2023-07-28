@@ -66,7 +66,7 @@ const InventoryItem = ({
       setSelectedItem(null);
       toast.success(response.data.message);
     } else {
-      toast.error(response.data.message);
+       toast.error( title === "Disk" ? response.data.error.split(":")[0] : response.data.message);
     }
   };
 

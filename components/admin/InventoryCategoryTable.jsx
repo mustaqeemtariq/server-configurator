@@ -79,7 +79,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
               header.size * 100
             }px] px-[24px] py-[16px]`}
           >
-            {header.name === "cpu_inventory" ? item.cpu_inventory.cpu_name : header.name === "modified_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") :  header.name === "created_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") : item[header.name]?.toString()}
+            {header.name === "cpu_inventory" ? item.cpu_inventory.cpu_name : header.name === "disk_inventory" ? item.disk_inventory.diskType : header.name === "modified_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") :  header.name === "created_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") : item[header.name]?.toString()}
           </td>
       ))}
         {headers[0].name !== "order_id" && headers[0].name !== "relation_id" && <td onClick={(event) => {

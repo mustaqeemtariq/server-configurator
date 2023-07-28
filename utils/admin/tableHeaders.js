@@ -105,9 +105,19 @@ export const RELATION_TABLE_HEADERS = [
     size: 2,
   },
   {
+    name: "cpu_inventory",
+    label: "CPU Name",
+    size: 3,
+  },
+  {
     name: "disk_id",
     label: "Disk ID",
     size: 2,
+  },
+  {
+    name: "disk_inventory",
+    label: "Disk Name",
+    size: 3,
   }
 ];
 

@@ -6,6 +6,7 @@ import DiskItem from "./DiskItem";
 import DiskSelectionShowcase from "./DiskSelectionShowcase";
 import { getTotalDisksCount } from "./utils";
 import { useEffect, useState } from "react";
+import { getAllRelations } from "@api/public";
 
 const SelectDisk = () => {
   let {
@@ -14,40 +15,57 @@ const SelectDisk = () => {
     disk: { selectedSSD, selectedHDD },
   } = useSelector((state) => state.configurator);
 
-  const [data, setData] = useState([])
- 
-  const togglePremiumDisks = (isOn) => {
-    if (!isOn) {
-      filteredDisks = filteredDisks.filter(val => !val.is_premium)
-      setData(filteredDisks)
-    }
-    else {
-      filteredDisks = filteredDisks.filter(val => val.is_premium)
-      setData(filteredDisks)
-    }
-  };
-
-  useEffect(()=> {
-    togglePremiumDisks()
-  }, [])
+  const [data, setData] = useState([]);
+  const [relations, setRelations] = useState([]);
+  const [filteredDisk, setFilteredDisk] = useState([])
 
   useEffect(() => {
-    const sortedDisks =  [...filteredDisks].sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-    setData(sortedDisks)
-  }, [filteredDisks])
+    if (relations.length === 0) {
+      getAllRelations().then((res) => setRelations(res.data));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (relations.length > 0) {
+      const filteredRelation = relations.filter(
+        (c) => c.cpu_id === cpu.selectedCPU.cpu_id
+      );
+      setData(filteredRelation);
+    }
+  }, [relations]);
+
+  const togglePremiumDisks = (isOn) => {
+    if (!isOn) {
+      let filteredDisks = [...data].filter((val) =>
+        !val.disk_inventory.is_premium
+      );
+      setFilteredDisk(filteredDisks);
+    } else {
+      let filteredDisks = [...data].filter((val) =>
+        val.disk_inventory.is_premium
+      );
+      setFilteredDisk(filteredDisks);
+    }
+  }
+  useEffect(() => {
+    togglePremiumDisks();
+  }, [data]);
+
+  useEffect(() => {
+    const sortedDisks = [...filteredDisk].sort(
+      (a, b) => parseFloat(a.price) - parseFloat(b.price)
+    );
+    setFilteredDisk(sortedDisks)
+  }, []);
 
   const toggleFilter = (value) => {
     if (value) {
-      const sortedDisks =  [...filteredDisks].sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-      return setData(sortedDisks)
+      const sortedDisks = [...filteredDisk].sort(
+        (a, b) => parseFloat(a.price) - parseFloat(b.price)
+      );
+      return setFilteredDisk(sortedDisks);
     }
-    setData(filteredDisks)
-  }
-
-  useEffect(() => {
-    const sortedDisks =  [...filteredDisks].sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-    setData(sortedDisks)
-  }, [filteredDisks])
+  };
 
   const selectedHDDCount = getTotalDisksCount(selectedHDD);
   const selectedSSDCount = getTotalDisksCount(selectedSSD);
@@ -68,13 +86,13 @@ const SelectDisk = () => {
         <div className="p-4 flex items-center gap-2">
           <h3 className="font-bold text-lg">Sort by price</h3>
           <ToggleSwitch value={true} onToggle={toggleFilter} />
-      </div>
+        </div>
         <div className="p-4">
           <div className="mt-4 grid grid-cols-2 flex-col gap-4 gap-x-8">
-            {data.map((item) => (
+            {filteredDisk.length > 0 && filteredDisk.map((item) => (
               <DiskItem
                 key={item.ram_id}
-                data={item}
+                data={item.disk_inventory}
                 limit={item.diskType === "SATA" ? hddLimit : ssdLimit}
               />
             ))}
