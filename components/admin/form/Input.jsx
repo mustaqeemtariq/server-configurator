@@ -43,14 +43,14 @@ const Input = ({
       />
 
 
-      {errors[name]?.type === "pattern" && (
+      {errors?.[name]?.type === "pattern" && (
         <p className="text-red-500 text-base mt-2">
           {name === "disk_id"
             ? "Multiple Disks are not allowed"
             : "Multiple CPUs are not allowed while editing"}
         </p>
       )}
-      {errors[name]?.type === "required" && (
+      {errors?.[name]?.type === "required" && (
         <p className="text-red-500 text-base mt-2">
           {name === "disk_id" ? "Disk Id is required" : "CPU Id is required"}
         </p>
