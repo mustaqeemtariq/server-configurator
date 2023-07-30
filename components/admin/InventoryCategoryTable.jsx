@@ -22,11 +22,13 @@ const HeaderRow = ({ headers }) => {
 };
 
 const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
+  console.log("AAAA", item);
   const handleClick = () => {
     onClick(item);
   };
 
   const handleCopy = (data) => {
+    console.log("DARA", data);
     const name = Object.keys(data)[0].split("_")[0].toUpperCase()
     setItems(prev => {
       const updated = [...prev]
@@ -40,25 +42,25 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
     
       return updated
     })
-
+    const check = headers[0].name
     setMaxId(prev => prev + 1)
-    switch (name) {
-      case "CPU":
+    switch (check) {
+      case "cpu_id":
         createCPU({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "GPU":
+      case "gpu_id":
         createGPU({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "DISK":
+      case "disk_id":
         createDisk({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "RAM":
+      case "ram_id":
         createRAM({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "UPLINK":
+      case "uplink_id":
         createUplink({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "OS": 
+      case "os_id": 
         createOS({...data, [headers[0].name]: maxId + 1 })
         break;
       default:
@@ -107,6 +109,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
 };
 
 const InventoryCategoryTable = ({ data, headers, onRowClick }) => {
+  console.log("DATA", data);
   const [items, setItems] = useState(data)
   const [maxId, setMaxId] = useState(headers[0].name === "order_id" ? data[0]?.[headers[0].name] : data[data.length-1]?.[headers[0].name])
   useEffect(() => {
