@@ -4,14 +4,13 @@ import { DISCOUNT_VALUES, PAYMENT_METHOD_VALUES } from "@utils/constants";
 // Selected item text //
 ////////////////////////
 const getDiskSelection = (selection, type) => {
-  console.log("DISK", selection);
   return Object.values(selection).map((disk) => {
     const {
       quantity,
       variant,
       data: { storage_size, storage_unit },
     } = disk;
-    return `${quantity}x ${storage_size} ${storage_unit} ${type} - ${disk.data.is_premium ? `${variant} - Datacenter` : variant} `;
+    return `${quantity}x ${storage_size} ${storage_unit} ${type} - ${variant} `;
   });
 };
 

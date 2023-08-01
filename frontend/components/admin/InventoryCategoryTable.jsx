@@ -106,6 +106,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
 };
 
 const InventoryCategoryTable = ({ data, headers, onRowClick }) => {
+  console.log("DATA", data);
   const [items, setItems] = useState(data)
   const [maxId, setMaxId] = useState(headers[0].name === "order_id" ? data[0]?.[headers[0].name] : data[data.length-1]?.[headers[0].name])
   useEffect(() => {

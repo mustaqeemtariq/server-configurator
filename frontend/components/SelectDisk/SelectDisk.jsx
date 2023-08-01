@@ -18,7 +18,6 @@ const SelectDisk = () => {
   const [data, setData] = useState([]);
   const [relations, setRelations] = useState([]);
   const [filteredDisk, setFilteredDisk] = useState([])
-  const [toggleValue, setToggleValue] = useState(false)
 
   useEffect(() => {
     if (relations.length === 0) {
@@ -53,16 +52,18 @@ const SelectDisk = () => {
   }, [data]);
 
   useEffect(() => {
-    toggleFilter(toggleValue)
-  }, [data, togglePremiumDisks]);
+    const sortedDisks = [...filteredDisk].sort(
+      (a, b) => parseFloat(a.price) - parseFloat(b.price)
+    );
+    setFilteredDisk(sortedDisks)
+  }, []);
 
   const toggleFilter = (value) => {
-    setToggleValue(value)
     if (value) {
       const sortedDisks = [...filteredDisk].sort(
-        (a, b) => parseFloat(a.disk_inventory.price) - parseFloat(b.disk_inventory.price)
+        (a, b) => parseFloat(a.price) - parseFloat(b.price)
       );
-      setFilteredDisk(sortedDisks);
+      return setFilteredDisk(sortedDisks);
     }
   };
 
@@ -85,7 +86,7 @@ const SelectDisk = () => {
         </div>
         <div className="p-4 flex items-center gap-2">
           <h3 className="font-bold text-lg">Sort by price</h3>
-          <ToggleSwitch value={false} onToggle={toggleFilter} />
+          <ToggleSwitch value={true} onToggle={toggleFilter} />
         </div>
         <div className="p-4">
           <div className="mt-4 grid grid-cols-2 flex-col gap-4 gap-x-8">

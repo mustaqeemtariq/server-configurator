@@ -226,7 +226,7 @@ export const DISK_FORM_FIELDS = [
     name: "diskType",
     label: "Disk Type",
     type: "select",
-    options: DISK_TYPE_OPTIONS
+    options: DISK_TYPE_OPTIONS,
   },
   {
     name: "imagesPath",
@@ -399,7 +399,6 @@ export const ORDER_FORM_FIELDS = [
         name: "unit",
         label: "Storage Unit",
         type: "select",
-        value: "TB",
         options: STORAGE_UNIT_OPTIONS
       },
       storage: {
