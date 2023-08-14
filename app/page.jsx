@@ -48,6 +48,8 @@ import { jsonStringifyFormData } from "@utils/admin/utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import { Modal } from "@components/modal";
+import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
 
 const Home = () => {
   const {
@@ -87,6 +89,7 @@ const Home = () => {
     email: undefined,
     customer_no: undefined,
   });
+  const [showModal, setShowModal] = useState(false)
 
   const handleCheckout = () => {
     if (cpuSelection === "-") {
@@ -138,10 +141,11 @@ const Home = () => {
       };
 
       createCheckout(jsonStringifyFormData(data, ["disks"])).then((res) => {
-        toast.success("We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.", {
-          autoClose: false,
-          className: 'bottom-10 left-1/2'
-        });
+        // toast.success("We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.", {
+        //   autoClose: false,
+        //   // className: 'bottom-10 left-1/2'
+        // });
+        setShowModal(true)
         setEmail("");
         setCustomer("");
       });
@@ -177,6 +181,7 @@ const Home = () => {
 
   const [loading, setLoading] = useState(true);
 
+  
   return (
     <div className="px-4">
        <ToastContainer
@@ -195,6 +200,14 @@ const Home = () => {
       <div className={clsx("fixed left-1/2 top-1/2", !loading && "hidden")}>
         <Spinner className="h-12 w-12 animate-spin" />
       </div>
+   {   showModal &&
+      <Modal onClose={()=> setShowModal(false)}>
+        <div className="flex items-center gap-x-4">
+        <CheckCircleIcon className="h-28 w-28 stroke-white fill-green-500"/>
+        <p className="text-lg">We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.</p>
+        </div>
+      </Modal>}
+      
       <div className={clsx(loading && "hidden")}>
         <Nav />
         <section className="w-full">
