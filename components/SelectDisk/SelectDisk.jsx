@@ -18,6 +18,7 @@ const SelectDisk = () => {
   const [data, setData] = useState([]);
   const [relations, setRelations] = useState([]);
   const [filteredDisk, setFilteredDisk] = useState([])
+  const [unsortedDisk, setUnsortedDisk] = useState([])
   const [toggleValue, setToggleValue] = useState(false)
 
   useEffect(() => {
@@ -40,29 +41,34 @@ const SelectDisk = () => {
       let filteredDisks = [...data].filter((val) =>
         !val.disk_inventory.is_premium
       );
+      setUnsortedDisk(filteredDisks)
       setFilteredDisk(filteredDisks);
+
     } else {
       let filteredDisks = [...data].filter((val) =>
         val.disk_inventory.is_premium
       );
+      setUnsortedDisk(filteredDisks)
       setFilteredDisk(filteredDisks);
     }
   }
   useEffect(() => {
-    togglePremiumDisks();
+    togglePremiumDisks(false);
   }, [data]);
 
   useEffect(() => {
     toggleFilter(toggleValue)
-  }, [data, togglePremiumDisks]);
+  }, [toggleValue]);
 
-  const toggleFilter = (value) => {
-    setToggleValue(value)
-    if (value) {
+  const toggleFilter = () => {
+    if (toggleValue) {
       const sortedDisks = [...filteredDisk].sort(
         (a, b) => parseFloat(a.disk_inventory.price) - parseFloat(b.disk_inventory.price)
       );
       setFilteredDisk(sortedDisks);
+    }
+    else {
+      setFilteredDisk(unsortedDisk)
     }
   };
 
@@ -85,13 +91,13 @@ const SelectDisk = () => {
         </div>
         <div className="p-4 flex items-center gap-2">
           <h3 className="font-bold text-lg">Sort by price</h3>
-          <ToggleSwitch value={false} onToggle={toggleFilter} />
+          <ToggleSwitch value={false} onToggle={(value) => setToggleValue(value)} />
         </div>
         <div className="p-4">
           <div className="mt-4 grid grid-cols-2 flex-col gap-4 gap-x-8">
-            {filteredDisk.length > 0 && filteredDisk.map((item) => (
+            {filteredDisk.length > 0 && filteredDisk.map((item, index) => (
               <DiskItem
-                key={item.ram_id}
+                key={`${index} - ${item.ram_id}`}
                 data={item.disk_inventory}
                 limit={item.disk_inventory.diskType === "SATA" ? hddLimit : ssdLimit}
               />

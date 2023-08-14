@@ -17,11 +17,12 @@ const RAMItem = ({ onClick, isSelected, data }) => {
       onClick={handleClick}
     >
       <div className="flex flex-1 justify-between flex-wrap gap-4">
-        <Image
+        <img
           src={data.imagesPath}
-          width={24}
-          height={24}
-          className="w-12 h-12 object-contain"
+          width={64}
+          height={64}
+          alt="ram"
+          className="object-contain"
         />
         <div className="flex flex-1 justify-between">
           <div>

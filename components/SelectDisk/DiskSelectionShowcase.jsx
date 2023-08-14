@@ -15,7 +15,7 @@ const DiskSelectionShowcase = ({ src, title, isHDD, limit }) => {
 
   for (let i = 0; i < limit; i++) {
     components.push(
-      <ContainedImage src={src} isSelected={i < totalSelectedDiskCount} />
+      <ContainedImage key={i} src={src} isSelected={i < totalSelectedDiskCount} />
     );
   }
 

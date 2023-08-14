@@ -4,7 +4,6 @@ import { DISCOUNT_VALUES, PAYMENT_METHOD_VALUES } from "@utils/constants";
 // Selected item text //
 ////////////////////////
 const getDiskSelection = (selection, type) => {
-  console.log("DISK", selection);
   return Object.values(selection).map((disk) => {
     const {
       quantity,
@@ -104,7 +103,7 @@ const getMonthlyPaymentsForUplink = (uplink) => {
   //   uplink;
 
   // const price = (variant && parseFloat(variant.price)) || 0;
-  return parseFloat(uplink.selectedUplink?.price) * parseFloat(uplink.selectedUplinkQuantity) + parseFloat(uplink.selectedUplinkVariant?.price)
+  return parseFloat(uplink.selectedUplink?.price) * parseFloat(uplink.selectedUplinkQuantity) + parseFloat(uplink.selectedUplinkVariant?.price) || 0
   // return price * quantity || 0;
 };
 

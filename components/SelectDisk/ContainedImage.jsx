@@ -7,11 +7,12 @@ const ContainedImage = ({ src, isSelected }) => {
         isSelected ? "bg-sky-200 border border-sky-500" : "bg-gray-200"
       }`}
     >
-      <Image
+      <img
         src={src}
-        width={24}
-        height={24}
-        className="w-12 h-12 object-contain opacity-50"
+        width={44}
+        height={44}
+        alt="disk"
+        className="object-contain opacity-50"
       />
     </div>
   );

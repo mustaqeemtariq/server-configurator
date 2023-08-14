@@ -28,39 +28,44 @@ const SelectCPU = () => {
   } = useSelector((state) => state.configurator);
 
   const dispatch = useDispatch();
-  allCPUs = allCPUs.filter(a => a.is_enabled)
-  filteredCPUs = filteredCPUs.filter(f => f.is_enabled)
 
-  const [allData, setAllData] = useState([])
-  const [filterData, setFilteredData] = useState([])
-  const [toggleValue, setToggleValue] = useState(true)
+  const [allData, setAllData] = useState([]);
+  const [filterData, setFilteredData] = useState([]);
+  const [toggleValue, setToggleValue] = useState(true);
 
   useEffect(() => {
-      toggleFilter(toggleValue)
-  }, [allCPUs])
-  
-  
+    allCPUs = allCPUs.filter((a) => a.is_enabled);
+    filteredCPUs = filteredCPUs.filter((f) => f.is_enabled);
+
+    if (allCPUs.length > 0) {
+      toggleFilter();
+    }
+  }, [allCPUs, filteredCPUs, toggleValue]);
+
   const handleCPUCompanySelection = (company) => {
     dispatch(selectCPUCompany(company));
   };
-  
+
   const handleLogoItemButtonClick = (id) => {
     dispatch(selectCPU(id));
   };
-  
-  const toggleFilter = (value) => {
-    setToggleValue(value)
-    if (value) {
-      const sortedCPUs = [...allCPUs].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-      const filteredSortedCPUs = [...filteredCPUs].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+
+  const toggleFilter = () => {
+    if (toggleValue) {
+      const sortedCPUs = [...allCPUs].sort(
+        (a, b) => parseFloat(a.price) - parseFloat(b.price)
+      );
+      const filteredSortedCPUs = [...filteredCPUs].sort(
+        (a, b) => parseFloat(a.price) - parseFloat(b.price)
+      );
       setAllData(sortedCPUs);
       setFilteredData(filteredSortedCPUs);
     } else {
       setAllData(allCPUs);
       setFilteredData(filteredCPUs);
     }
-  }  
-  
+  };
+
   return (
     <section>
       <div className="mx-auto max-h-96 overflow-y-auto bg-gray-50 border border-sky-400 rounded-lg">
@@ -89,7 +94,7 @@ const SelectCPU = () => {
         </div>
         <div className="flex items-center gap-2 p-4">
           <h3 className="font-bold text-lg">Sort by price</h3>
-          <ToggleSwitch value={true} onToggle={toggleFilter} />
+          <ToggleSwitch value={true} onToggle={(value) => setToggleValue(value)} />
         </div>
         <div className="mt-4 flex flex-col gap-2 px-2">
           {(selectedCPUCompany ? filterData : allData).map((item) => (

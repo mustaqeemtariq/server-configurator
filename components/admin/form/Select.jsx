@@ -11,7 +11,7 @@ const Select = ({ type, name, label, register, options }) => {
         {...register(name)}
       >
         {options?.map((option) => (
-          <option value={option.value}>{option.label}</option>
+          <option key={option.label} value={option.value}>{option.label}</option>
         ))}
       </select>
     </div>

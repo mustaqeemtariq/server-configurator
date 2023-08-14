@@ -47,6 +47,7 @@ import { containsOnlyDigits } from "@utils/strings";
 import { jsonStringifyFormData } from "@utils/admin/utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 
 const Home = () => {
   const {
@@ -117,8 +118,9 @@ const Home = () => {
           return {
             quantity: parseInt(d.split(" ")[0]),
             size: d.split(" ")[1],
-            unit: d.split(" ")[2],
-            storage: d.split(" ")[3],
+            unit: `${d.split(" ")[2]} ${d.split(" ")[3]}`,
+            storage: d.split(" ")[4],
+            is_premium: d.includes('Datacenter') ? true : false
           };
         }),
         customer_email: email,
@@ -134,8 +136,12 @@ const Home = () => {
         payment_method: paymentMethod,
         comments: remarks,
       };
+
       createCheckout(jsonStringifyFormData(data, ["disks"])).then((res) => {
-        toast.success(res.data.message);
+        toast.success("We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.", {
+          autoClose: false,
+          className: 'bottom-10 left-1/2'
+        });
         setEmail("");
         setCustomer("");
       });
@@ -251,7 +257,7 @@ const Home = () => {
               options={PAYMENT_METHOD_OPTIONS}
               onChange={(value) => dispatch(setPaymentMethod(value))}
             />
-            <div className="order-2 flex items-center">
+            <div className="order-2 flex items-center flex-col">
               <div
                 onClick={handleCheckout}
                 className="text-white text-lg w-full text-center cursor-pointer bg-green-500 hover:bg-green-700 font-medium rounded-lg px-5 py-5"
@@ -259,6 +265,7 @@ const Home = () => {
                 <FontAwesomeIcon icon={faCartShopping} />
                 Proceed to Checkout
               </div>
+            <p className="italic">By placing an order, you accept the <a className="text-blue-500 underline cursor-pointer" href="https://active-servers.com/agb.php">Terms and conditions</a></p>
             </div>
             <Dropdown
               label="Rabattstufe"

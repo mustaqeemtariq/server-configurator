@@ -74,7 +74,7 @@ const UplinkItem = ({ data, onClick }) => {
               onChange={handleVariantChange}
             >
               {dataCapacity.map((item) => (
-                <option value={item.label} key={item}>
+                <option value={item.label} key={item.label}>
                   {item.label}
                 </option>
               ))}
@@ -91,6 +91,7 @@ const UplinkItem = ({ data, onClick }) => {
             type="number"
             className={`${HIDE_SPIN_BUTTONS_ON_NUMBER_INPUT} px-2 py-1 text-center text-sm rounded-lg w-10 bg-gray-50 border border-gray-300`}
             value={quantity}
+            onChange={(event) => updateQuantity(Number(event.target.value))}
           />
           <QuantityControlButton
             icon={faPlus}

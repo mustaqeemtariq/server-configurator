@@ -79,11 +79,11 @@ const DiskItem = ({ data, limit }) => {
         }`}
       >
         <div className="relative rounded flex items-center justify-center text-xs text-white">
-          <Image
+          <img
             src={data.imagesPath}
-            width={24}
-            height={24}
-            className="w-12 h-12"
+            width={44}
+            height={44}
+            // className="w-12 h-12"
             alt=""
           />
           {/* <div className="absolute text-xs border border-gray-200 text-gray-600 font-medium -bottom-1 right-0 p-1 rounded-lg bg-gradient-to-b from-gray-50/20 to-gray-300/50 backdrop-blur-sm">
@@ -100,10 +100,10 @@ const DiskItem = ({ data, limit }) => {
           <select
             className="text-sm rounded-md bg-gray-100 border p-2 border-gray-400 font-medium opacity-50 "
             onChange={handleVariantChange}
-            value={variant}
+            defaultValue={variant}
           >
-            {variants.map((item) => (
-              <option value={item} key={item}>
+            {variants.map((item, index) => (
+              <option value={item} key={`${index} + ${item}`}>
                 {item}
               </option>
             ))}
@@ -120,6 +120,7 @@ const DiskItem = ({ data, limit }) => {
           type="number"
           className={`${HIDE_SPIN_BUTTONS_ON_NUMBER_INPUT} px-2 py-1 text-sm text-center rounded-lg w-10 bg-gray-50 border border-gray-300`}
           value={quantity}
+          onChange={(event) => updateQuantity(Number(event.target.value))}
         />
         <QuantityControlButton
           icon={faPlus}

@@ -60,7 +60,7 @@ export const filterCPUsByCompany = (allCPUs, company) => {
 };
 
 export const filterRAMsByCPU = (allRAMs, cpuID, isECC) => {
-  return allRAMs.filter((ram) => ram.cpu_id === cpuID && ram.is_ECC === isECC);
+  return allRAMs.filter((ram) => ram.cpu_id === cpuID);
 };
 
 export const filterDisksByCPU = (allDisks, cpuID, premiumDisksOnly) => {

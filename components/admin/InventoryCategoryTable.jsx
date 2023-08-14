@@ -8,6 +8,7 @@ const HeaderRow = ({ headers }) => {
       <tr className="flex bg-gray-300">
         {headers.map((header) => (
           <th
+            key={header.label}
             className={`text-center w-[${
               header.size * 100
             }px] px-[24px] py-[16px]`}
@@ -74,6 +75,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
     >
       {headers.map((header) => (
           <td
+            key={header.name}
             className={`text-center w-[${
               header.size * 100
             }px] px-[24px] py-[16px]`}

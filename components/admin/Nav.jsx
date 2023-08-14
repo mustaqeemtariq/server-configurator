@@ -13,7 +13,7 @@ const Nav = ({ currentNav, setCurrentNav }) => {
       <div className="flex items-center gap-x-2">
       {Object.values(ADMIN_NAVIGATION_OPTIONS).map((nav) => (
         <p
-          className={`py-[16px] px-[16px] cursor-pointer hover:text-white hover:bg-sky-500 text-lg h-full ${
+          key={nav.label}  className={`py-[16px] px-[16px] cursor-pointer hover:text-white hover:bg-sky-500 text-lg h-full ${
             currentNav === nav.name ? "text-white bg-sky-500" : "text-gray-700"
           }`}
           onClick={() => setCurrentNav(nav.name)}

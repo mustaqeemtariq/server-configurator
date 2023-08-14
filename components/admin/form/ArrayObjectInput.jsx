@@ -11,9 +11,9 @@ const ArrayObjectInput = ({
 }) => {
   watch(name);
 
-  // const items = getValues()[name];
-
+  
   const values = getValues(); 
+  // const items = getValues()[name];
   const items = values && values[name] ? values[name] : [];
 
   const addItem = () => {
@@ -41,8 +41,13 @@ const ArrayObjectInput = ({
         options.type === "select" ? 
         <div className="flex flex-col mb-2">
           <label className="text-md my-2" htmlFor={`${name}.${index}.${field[0]}`}>{options.label}</label>
-          <select className="rounded" register={register} name={`${name}.${index}.${field[0]}`}>
-          {options?.options.map(v => <option value={v.value}>{v.label}</option>)}
+          <select className="rounded" register={register}
+           onChange={(e) => {
+            const updatedItem = { ...item, [field[0]]: e.target.value };
+            setValue(name, items.map((el, i) => (i === index ? updatedItem : el)));
+          }}          
+          name={`${name}.${index}.${field[0]}`}>
+          {options?.options.map(v => <option key={v.value} selected={v.value === field[1]} value={v.value}>{v.label}</option>)}
         </select>
         </div> :
         <Input
@@ -62,7 +67,7 @@ const ArrayObjectInput = ({
       <div>
         {items &&
           items.map((item, index) => (
-            <div className="grid grid-cols-3 gap-2 items-end">
+            <div key={index} className="grid grid-cols-3 gap-2 items-end">
               {getItemFields(item, index)}
               <button
                 type="button"

@@ -12,16 +12,31 @@ const SelectRAM = () => {
   } = useSelector((state) => state.configurator);
 
   const dispatch = useDispatch();
-  const sortedRams = [...filteredRAMs].sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-  const [data, setData] = useState(sortedRams)
+  // const sortedRams = [...filteredRAMs].sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+  const [data, setData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
+  const [toggleValue, setToggleValue] = useState(false)
 
   useEffect(() => {
     const sortedRams = [...filteredRAMs].sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
     setData(sortedRams)
+    setFilteredData(sortedRams)
   }, [filteredRAMs])
 
-  const toggleECCRam = () => {
-    dispatch(toggleECCRAMsOnly());
+  useEffect(() => {
+    toggleECCRam(toggleValue)
+  }, [data])
+
+  const toggleECCRam = (value) => {
+    setToggleValue(value)
+    if (value) {
+      const updatedData = [...data].filter(r => r.is_ECC)
+      setFilteredData(updatedData)
+    }
+    else {
+      const updatedData = [...data].filter(r => !r.is_ECC)
+      setFilteredData(updatedData)
+    }
   };
 
   const toggleFilter = (value) => {
@@ -38,7 +53,7 @@ const SelectRAM = () => {
         <h3 className="font-bold text-lg">Select RAM</h3>
         <div className="flex items-center gap-2">
           <h3 className="font-bold text-lg">ECC</h3>
-          <ToggleSwitch onToggle={toggleECCRam} />
+          <ToggleSwitch value={false} onToggle={toggleECCRam} />
         </div>
       </div>
       <div className="hidden p-4 items-center gap-2">
@@ -46,7 +61,7 @@ const SelectRAM = () => {
           <ToggleSwitch value={true} onToggle={toggleFilter} />
       </div>
       <div className="flex flex-col gap-2 p-4">
-        {data.map((item) => (
+        {filteredData.map((item) => (
           <RAMItem
             onClick={() => dispatch(selectRAM(item))}
             key={item.ram_id}

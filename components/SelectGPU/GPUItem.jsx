@@ -12,7 +12,9 @@ const GPUItem = ({ data, isSelected }) => {
     >
         <img
           src={data.image_path || ""}
-          className="w-16 h-16 object-contain"
+          height={54}
+          width={54}
+          className="object-contain"
           alt="gpu image"
         />
       <div className="flex flex-col">

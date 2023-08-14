@@ -18,11 +18,11 @@ const CPUItem = ({ data, onClick, isSelected }) => {
       }`}
       onClick={() => onClick(data)}
     >
-      <Image
+      <img
         src={data.imagesPath || ""}
-        width={24}
-        height={24}
-        className="w-12 h-12 object-contain"
+        width={55}
+        height={55}
+        className="object-contain"
         alt="cpu image"
       />
       <div className="flex flex-1 items-center justify-between">

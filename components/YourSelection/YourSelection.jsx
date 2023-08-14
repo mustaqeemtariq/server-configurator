@@ -75,7 +75,7 @@ const YourSelection = () => {
             <h4>Disk:</h4>
             <ul className="rounded-md text-white font-semibold bg-sky-500 px-2 py-1 list-disc list-inside">
             {diskSelection.length > 0 ? (
-              diskSelection.map((selection) => <li>{selection}</li>)
+              diskSelection.map((selection) => <li key={selection}>{selection}</li>)
             ) : (
               <p>-</p>
             )}
@@ -89,7 +89,7 @@ const YourSelection = () => {
               <SelectionPriceItem title="Setupkosten" text={setupCosts < 0 ? 0 : setupCosts} />
               <SelectionPriceItem
                 title="Monatlicher Preis"
-                text={monthlyPayments < 0 ? 0 : monthlyPayments}
+                text={monthlyPayments}
               />
             </div>
           </div>

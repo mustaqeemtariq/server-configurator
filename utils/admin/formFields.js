@@ -395,18 +395,22 @@ export const ORDER_FORM_FIELDS = [
         label: "Storage Size",
         type: "number",
       },
-      unit: {
-        name: "unit",
-        label: "Storage Unit",
-        type: "select",
-        value: "TB",
-        options: STORAGE_UNIT_OPTIONS
-      },
       storage: {
         name: "storage",
         label: "Storage Type",
         type: "select",
         options: STORAGE_TYPE_OPTIONS
+      },
+      unit: {
+        name: "unit",
+        label: "Storage Unit",
+        type: "select",
+        options: STORAGE_UNIT_OPTIONS
+      },
+      is_premium: {
+        name: "is_premium",
+        label: "Premium",
+        type: "text"
       }
     },
   },

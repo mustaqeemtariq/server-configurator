@@ -30,11 +30,11 @@ const OSItem = ({ data }) => {
         isSelected ? "border-sky-600 bg-sky-100" : "border-sky-400 bg-gray-50"
       }`}
     >
-      <Image
+      <img
         src={data.imagesPath}
-        width={30}
-        height={30}
-        className="w-12 h-12 object-contain"
+        width={45}
+        height={45}
+        className="object-contain"
         alt=""
       />
       <h3 className="font-bold text-lg">{data.os_name}</h3>
@@ -45,7 +45,7 @@ const OSItem = ({ data }) => {
       >
         <option value="none">Version</option>
         {osVersions.map((item) => (
-          <option value={item.version} key={item}>
+          <option value={item.version} key={item.version}>
             {item.version}
           </option>
         ))}

@@ -18,6 +18,7 @@ const Dropdown = ({ value, label, options, onChange }) => {
           <option
             className="px-4 py-2 rounded-lg flex items-center gap-4 hover:bg-gray-100"
             value={option.value}
+            key={option.label}
           >
             {option.label}
           </option>
