@@ -67,7 +67,7 @@ const CPUItem = ({ data, onClick, isSelected }) => {
                 Sold Out
               </span>
             )}
-            <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-600/20 text-gray-600">{`${data.delivery_time} Tage Lieferzeit`}</span>
+            <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-600/20 text-gray-600">{`${data.delivery_time} Day(s) delivery time`}</span>
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     const response = await axios
-      .post("http://134.255.253.170:5000/api/login", {
+      .post("https://active-servers.com/calc-api/login", {
         email,
         password,
       })

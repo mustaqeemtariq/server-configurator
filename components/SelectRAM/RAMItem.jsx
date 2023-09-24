@@ -35,7 +35,7 @@ const RAMItem = ({ onClick, isSelected, data }) => {
           </div>
         </div>
         <div className="flex flex-col gap-2 place-self-end">
-          <span className="flex items-center gap-1 text-xs text-gray-900 font-medium">
+          <span className="flex items-center gap-1 text-xs text-gray-900 font-medium invisible">
             Quantity Left: {quantity}
           </span>
         </div>

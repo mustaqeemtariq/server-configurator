@@ -47,7 +47,7 @@ import { containsOnlyDigits } from "@utils/strings";
 import { jsonStringifyFormData } from "@utils/admin/utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Link from "next/link";
+
 import { Modal } from "@components/modal";
 import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
 
@@ -75,6 +75,7 @@ const Home = () => {
     cpuSelection,
     diskSelection,
     ramSelection,
+    gpuSelection,
     osSelection,
     uplinkSelection,
     setupCosts,
@@ -129,6 +130,7 @@ const Home = () => {
         customer_email: email,
         customer_no: customer,
         ram: ramSelection,
+        gpu: gpuSelection,
         os: osSelection,
         uplink: uplinkSelection,
         setup_cost: setupCosts,
@@ -219,7 +221,7 @@ const Home = () => {
         <div className="bg-white-100 border border-sky-400 rounded-lg shadow-sm p-2 py-4">
           <div className="md:grid flex flex-col gap-y-2 md:space-y-0 md:grid-rows-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-2 gap-3">
             <div>
-              <h3 className="font-bold text-gray-600 text-lg">Kunden-eMail</h3>
+              <h3 className="font-bold text-gray-600 text-lg">Customer-eMail</h3>
               <input
                 type="text"
                 value={email}
@@ -234,7 +236,7 @@ const Home = () => {
               )}
             </div>
             <div>
-              <h3 className="font-bold text-gray-600 text-lg">Kunden-Nr</h3>
+              <h3 className="font-bold text-gray-600 text-lg">Customer-ID</h3>
               <input
                 type="text"
                 value={customer}
@@ -259,13 +261,13 @@ const Home = () => {
               )}
             </div>
             <Dropdown
-              label="Vertragsart"
+              label="Contract type"
               value={contractType}
               options={CONTRACT_TYPE_OPTIONS}
               onChange={(value) => dispatch(setContractType(value))}
             />
             <Dropdown
-              label="Bezahlmethode"
+              label="Payment method"
               value={paymentMethod}
               options={PAYMENT_METHOD_OPTIONS}
               onChange={(value) => dispatch(setPaymentMethod(value))}
@@ -281,21 +283,21 @@ const Home = () => {
             <p className="italic">By placing an order, you accept the <a className="text-blue-500 underline cursor-pointer" href="https://active-servers.com/agb.php">Terms and conditions</a></p>
             </div>
             <Dropdown
-              label="Rabattstufe"
+              label="Discount"
               value={discount}
               options={
                 selectedCPU?.special_offer_active
                   ? DISCOUNT_OPTIONS
                   : DISCOUNT_OPTIONS?.filter(
                       (item) => {
-                        return item.value != "special_discount"
+                        return item.value != "Special Discount"
                       }
                     )
               }
               onChange={(value) => dispatch(setDiscount(value))}
             />
             <Dropdown
-              label="Vertragsdauer"
+              label="Contract duration"
               value={contractDuration}
               options={CONTRACT_DURATION_OPTIONS}
               onChange={(value) => dispatch(setContractDuration(value))}
@@ -315,7 +317,7 @@ const Home = () => {
         </div>
 
         <h2 className="text-2xl text-sky-400 font-bold py-2">
-          Custom Setup Configuration
+          Select Dedicated Server Hardware
         </h2>
         <div className="flex flex-col gap-y-2 md:grid grid-cols-3 grid-rows-2 gap-2">
           <div>

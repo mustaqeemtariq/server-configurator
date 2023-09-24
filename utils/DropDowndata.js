@@ -1,46 +1,46 @@
 const discountLevel = {
-  title: "Rabattstufe",
-  initialHeading: "Sonderangebot",
+  title: "Discount",
+  initialHeading: "Special offer",
   dropDownData: [
-    "Sonderangebot",
-    "Ab dem 1. Rootserver",
-    "Ab dem 10. Rootserver",
-    "Ab dem 20. Rootserver",
-    "Ab dem 30. Rootserver",
-    "Ab dem 40. Rootserver",
-    "Ab dem 50. Rootserver",
-    "Ab dem 60. Rootserver",
-    "Ab dem 70. Rootserver",
-    "Ab dem 80. Rootserver",
-    "Ab dem 90. Rootserver",
-    "Ab dem 99. Rootserver",
+    "Special offer",
+    "from the 1. Rootserver",
+    "from the 10. Rootserver",
+    "from the 20. Rootserver",
+    "from the 30. Rootserver",
+    "from the 40. Rootserver",
+    "from the 50. Rootserver",
+    "from the 60. Rootserver",
+    "from the 70. Rootserver",
+    "from the 80. Rootserver",
+    "from the 90. Rootserver",
+    "from the 99. Rootserver",
   ],
 };
 
 const contractType = {
-  title: "Vertragsart",
+  title: "Contract type",
   initialHeading: "Dedicated Server",
-  dropDownData: ["Hardwaremiete", "Dedicated Server"],
+  dropDownData: ["Rent Hardware", "Dedicated Server"],
 };
 
 const contractDuration = {
-  title: "Vertragsdauer",
-  initialHeading: "1 monat",
+  title: "Contract duration",
+  initialHeading: "1 month",
   dropDownData: [
     {
-      title: "1 monat",
+      title: "1 month",
       offer: false,
     },
     {
-      title: "12 monat",
+      title: "12 months",
       offer: true,
     },
   ],
 };
 
 const paymentMethod = {
-  title: "Bezahlmethode",
-  initialHeading: "Bezahlmethode",
+  title: "Payment method",
+  initialHeading: "Payment method",
   dropDownData: [
     {
       imagePath: "/assets/images/paypal.png",
@@ -56,15 +56,15 @@ const paymentMethod = {
     },
     {
       imagePath: "/assets/images/sepa.png",
-      title: "Lastschrift",
+      title: "Debit",
     },
     {
       imagePath: "/assets/images/creditcard.png",
-      title: "Kreditkarte",
+      title: "Creditcard",
     },
     {
       imagePath: "/assets/images/Überweisung.png",
-      title: "Uberweisung",
+      title: "Bank transfer",
     },
   ],
 };

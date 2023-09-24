@@ -43,11 +43,13 @@ const SelectDisk = () => {
       );
       setUnsortedDisk(filteredDisks)
       setFilteredDisk(filteredDisks);
-
+      console.log("FILTER", filteredDisk);
     } else {
       let filteredDisks = [...data].filter((val) =>
         val.disk_inventory.is_premium
       );
+
+      console.log("FILTER", data);
       setUnsortedDisk(filteredDisks)
       setFilteredDisk(filteredDisks);
     }
@@ -81,11 +83,11 @@ const SelectDisk = () => {
 
   return (
     <section>
-      <div className="max-h-96 overflow-y-auto mx-auto bg-gray-50 border border-sky-400 shadow-lg rounded-lg">
+      <div className="max-h-[40rem] overflow-y-auto mx-auto bg-gray-50 border border-sky-400 shadow-lg rounded-lg">
         <div className="sticky top-0 z-40 bg-white p-4 flex justify-between items-center gap-2 text-lg font-bold">
           <h3>Select Disk</h3>
           <div className="flex items-center gap-x-2">
-            <h3 className="font-bold text-lg">Datacenter Premium Hardware</h3>
+            <h3 className="font-bold text-lg">Datacenter</h3>
             <ToggleSwitch onToggle={togglePremiumDisks} />
           </div>
         </div>
@@ -107,14 +109,14 @@ const SelectDisk = () => {
         <div>
           <div className="flex flex-col gap-4 mt-3 p-4">
             <DiskSelectionShowcase
-              title={`2,5"(${selectedHDDCount}/${hddLimit})`}
+              title={`SATA(${selectedHDDCount}/${hddLimit})`}
               src="/assets/images/hdd.png"
               isHDD={true}
               limit={hddLimit}
             />
             <DiskSelectionShowcase
               title={`M.2(${selectedSSDCount}/${ssdLimit})`}
-              src="/assets/images/ssd.png"
+              src="/assets/images/nvme.png"
               isHDD={false}
               limit={ssdLimit}
             />

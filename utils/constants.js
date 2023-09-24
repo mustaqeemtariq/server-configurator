@@ -5,19 +5,19 @@ export const DISCOUNT_VALUES = {
     discountPercentage: 0,
   },
   FIRST_SERVER: {
-    name: "first_server",
+    name: "First server",
     discountPercentage: 5,
   },
   TEN_OR_MORE: {
-    name: "ten_or_more",
+    name: "10 or more servers",
     discountPercentage: 10,
   },
   TWENTY_OR_MORE: {
-    name: "twenty_or_more",
+    name: "20 or more servers",
     discountPercentage: 15,
   },
   SPECIAL_DISCOUNT: {
-    name: "special_discount",
+    name: "Special Discount",
     discountPercentage: 20,
   },
 };

@@ -84,11 +84,11 @@ const YourSelection = () => {
           <SelectionItem title="Uplink" text={uplinkSelection} />
           <SelectionItem title="RAM" text={ramSelection} />
           <div className="row-span-2 p-2">
-            <h3>Cost</h3>
+            <h3>Costs (excl. VAT):</h3>
             <div className="flex flex-col h-full pb-12 gap-y-2 lg:gap-y-0 lg:flex-row  md:gap-x-2 text-center">
-              <SelectionPriceItem title="Setupkosten" text={setupCosts < 0 ? 0 : setupCosts} />
+              <SelectionPriceItem title="Setup" text={setupCosts < 0 ? 0 : setupCosts} />
               <SelectionPriceItem
-                title="Monatlicher Preis"
+                title="Monthly"
                 text={monthlyPayments}
               />
             </div>

@@ -68,7 +68,7 @@ const SelectCPU = () => {
 
   return (
     <section>
-      <div className="mx-auto max-h-96 overflow-y-auto bg-gray-50 border border-sky-400 rounded-lg">
+      <div className="mx-auto max-h-[40em] overflow-y-auto bg-gray-50 border border-sky-400 rounded-lg">
         <div className="flex items-center p-4 z-50 bg-white sticky top-0">
           <h3 className="font-bold text-xl">Select CPU</h3>
           <div className="p-1 flex ml-auto items-center gap-2">

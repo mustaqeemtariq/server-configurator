@@ -36,7 +36,7 @@ export const getUplinkSelection = (uplink) => {
   const { selectedUplink, selectedUplinkVariant, selectedUplinkQuantity } =
     uplink;
   return selectedUplink
-    ? `${selectedUplinkQuantity}x ${selectedUplink.transfer_speed} - ${selectedUplinkVariant.label} (${selectedUplinkVariant.price} €)`
+    ? `${selectedUplinkQuantity}x ${selectedUplink.transfer_speed} - ${selectedUplinkVariant.label}` // (${selectedUplinkVariant.price} €)`
     : "-";
 };
 

@@ -48,7 +48,7 @@ const SelectRAM = () => {
   }
 
   return (
-    <div className="rounded-lg shadow-sm w-full max-h-96 overflow-y-auto">
+    <div className="max-h-[40em] rounded-lg shadow-sm w-full overflow-y-auto">
       <div className="bg-white z-50 sticky top-0 flex justify-between p-4">
         <h3 className="font-bold text-lg">Select RAM</h3>
         <div className="flex items-center gap-2">
