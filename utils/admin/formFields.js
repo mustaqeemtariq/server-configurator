@@ -480,6 +480,24 @@ export const ORDER_FORM_FIELDS = [
   },
 ]
 
+export const CUSTOMER_FORM_FIELDS = [
+  {
+    name: "name",
+    label: "Name",
+    type: "text",
+  },
+  {
+    name: "email",
+    label: "Email",
+    type: "text",
+  },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+  }
+]
+
 export const UPLINK_FORM_FIELDS = [
   // {
   //   name: "uplink_id",

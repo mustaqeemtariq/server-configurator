@@ -26,9 +26,13 @@ import {
   createRelation,
   editRelation,
   deleteRelation,
+  createCustomer,
+  deleteCustomer,
+  getAllCustomers,
 } from "@api/admin";
 import {
   CPU_TABLE_HEADERS,
+  CUSTOMER_TABLE_HEADERS,
   DISK_TABLE_HEADERS,
   GPU_TABLE_HEADERS,
   ORDER_TABLE_HEADERS,
@@ -39,6 +43,7 @@ import {
 } from "@utils/admin/tableHeaders";
 import {
   CPU_FORM_FIELDS,
+  CUSTOMER_FORM_FIELDS,
   DISK_FORM_FIELDS,
   GPU_FORM_FIELDS,
   ORDER_FORM_FIELDS,
@@ -55,7 +60,7 @@ import {
   getAllOrders,
   getAllRAMs,
   getAllUplinks,
-  getAllRelations,
+  getAllRelations
 } from "@api/public";
 
 const INVENTORY_TYPE_COMPONENT_MAP = {
@@ -143,11 +148,23 @@ const INVENTORY_TYPE_COMPONENT_MAP = {
       primaryKeyName="uplink_id"
       tableHeaders={UPLINK_TABLE_HEADERS}
       formFields={UPLINK_FORM_FIELDS}
-      jsonFields={["data_capacity"]}
+      jsonFields={["data_capcity"]}
       getAll={getAllUplinks}
       create={createUplink}
       edit={editUplink}
       destroy={deleteUplink}
+    />
+  ),
+  [INVENTORY_TYPES.CUSTOMER]: () => (
+    <InventoryItem
+      title="Customer"
+      primaryKeyName="customer_id"
+      tableHeaders={CUSTOMER_TABLE_HEADERS}
+      formFields={CUSTOMER_FORM_FIELDS}
+      jsonFields={[]}
+      getAll={getAllCustomers}
+      create={createCustomer}
+      destroy={deleteCustomer}
     />
   ),
   [INVENTORY_TYPES.ORDER]: () => (

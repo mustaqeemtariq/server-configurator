@@ -81,6 +81,18 @@ export const deleteUplink = (id) => {
   return api.delete(`/uplink/${id}`, getAuthHeaders());
 };
 
+export const getAllCustomers = () => {
+  return axios.get("/customers", getAuthHeaders());
+};
+
+export const createCustomer = (data) => {
+  return api.post("/register", data, getAuthHeaders());
+};
+
+export const deleteCustomer = (email) => {
+  return axios.delete(`/customer/${email}`, getAuthHeaders());
+};
+
 export const deleteOrder = (id) => {
   return api.delete(`/order/${id}`, getAuthHeaders());
 };

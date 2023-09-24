@@ -211,6 +211,29 @@ export const UPLINK_TABLE_HEADERS = [
   }
 ];
 
+export const CUSTOMER_TABLE_HEADERS = [
+  {
+    name: "customer_id",
+    label: "ID",
+    size: 1,
+  },
+  {
+    name: "name",
+    label: "Name",
+    size: 3,
+  },
+  {
+    name: "email",
+    label: "Email",
+    size: 3,
+  },
+  {
+    name: "password",
+    label: "Password",
+    size: 3
+  }
+];
+
 export const ORDER_TABLE_HEADERS = [
   {
     name: "order_id",

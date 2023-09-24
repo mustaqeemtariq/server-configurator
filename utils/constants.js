@@ -158,7 +158,8 @@ export const INVENTORY_TYPES = {
   UPLINK: "uplink",
   RAM: "ram",
   OS: "os",
-  ORDER: "order"
+  ORDER: "order",
+  CUSTOMER: "customer"
 };
 
 export const BOOLEAN_OPTIONS = [
