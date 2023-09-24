@@ -81,6 +81,11 @@ export const DISK_TABLE_HEADERS = [
     size: 2,
   },
   {
+    name: "is_premium",
+    label: "Premium",
+    size: 2,
+  },
+  {
     name: "storage_unit",
     label: "Storage Unit",
     size: 2,
@@ -135,6 +140,11 @@ export const RAM_TABLE_HEADERS = [
   {
     name: "cpu_inventory",
     label: "CPU Name",
+    size: 2,
+  },
+  {
+    name: "storage_size",
+    label: "Size",
     size: 2,
   },
   {

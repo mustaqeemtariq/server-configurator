@@ -226,7 +226,7 @@ export const DISK_FORM_FIELDS = [
     name: "diskType",
     label: "Disk Type",
     type: "select",
-    options: DISK_TYPE_OPTIONS,
+    options: DISK_TYPE_OPTIONS
   },
   {
     name: "imagesPath",
@@ -395,17 +395,22 @@ export const ORDER_FORM_FIELDS = [
         label: "Storage Size",
         type: "number",
       },
+      storage: {
+        name: "storage",
+        label: "Storage Type",
+        type: "select",
+        options: STORAGE_TYPE_OPTIONS
+      },
       unit: {
         name: "unit",
         label: "Storage Unit",
         type: "select",
         options: STORAGE_UNIT_OPTIONS
       },
-      storage: {
-        name: "storage",
-        label: "Storage Type",
-        type: "select",
-        options: STORAGE_TYPE_OPTIONS
+      is_premium: {
+        name: "is_premium",
+        label: "Premium",
+        type: "text"
       }
     },
   },

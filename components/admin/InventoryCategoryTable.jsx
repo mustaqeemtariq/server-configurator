@@ -8,6 +8,7 @@ const HeaderRow = ({ headers }) => {
       <tr className="flex bg-gray-300">
         {headers.map((header) => (
           <th
+            key={header.label}
             className={`text-center w-[${
               header.size * 100
             }px] px-[24px] py-[16px]`}
@@ -27,7 +28,6 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
   };
 
   const handleCopy = (data) => {
-    const name = Object.keys(data)[0].split("_")[0].toUpperCase()
     setItems(prev => {
       const updated = [...prev]
       const indexToUpdate = updated.findIndex(item => item[headers[0].name] === data[headers[0].name])
@@ -40,25 +40,25 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
     
       return updated
     })
-
+    const check = headers[0].name
     setMaxId(prev => prev + 1)
-    switch (name) {
-      case "CPU":
+    switch (check) {
+      case "cpu_id":
         createCPU({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "GPU":
+      case "gpu_id":
         createGPU({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "DISK":
+      case "disk_id":
         createDisk({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "RAM":
+      case "ram_id":
         createRAM({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "UPLINK":
+      case "uplink_id":
         createUplink({...data, [headers[0].name]: maxId + 1 })
         break;
-      case "OS": 
+      case "os_id": 
         createOS({...data, [headers[0].name]: maxId + 1 })
         break;
       default:
@@ -75,6 +75,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
     >
       {headers.map((header) => (
           <td
+            key={header.name}
             className={`text-center w-[${
               header.size * 100
             }px] px-[24px] py-[16px]`}

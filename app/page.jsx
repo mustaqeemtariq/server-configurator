@@ -48,6 +48,9 @@ import { jsonStringifyFormData } from "@utils/admin/utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Modal } from "@components/modal";
+import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
+
 const Home = () => {
   const {
     config,
@@ -72,6 +75,7 @@ const Home = () => {
     cpuSelection,
     diskSelection,
     ramSelection,
+    gpuSelection,
     osSelection,
     uplinkSelection,
     setupCosts,
@@ -86,6 +90,7 @@ const Home = () => {
     email: undefined,
     customer_no: undefined,
   });
+  const [showModal, setShowModal] = useState(false)
 
   const handleCheckout = () => {
     if (cpuSelection === "-") {
@@ -117,13 +122,15 @@ const Home = () => {
           return {
             quantity: parseInt(d.split(" ")[0]),
             size: d.split(" ")[1],
-            unit: d.split(" ")[2],
-            storage: d.split(" ")[3],
+            unit: `${d.split(" ")[2]} ${d.split(" ")[3]}`,
+            storage: d.split(" ")[4],
+            is_premium: d.includes('Datacenter') ? true : false
           };
         }),
         customer_email: email,
         customer_no: customer,
         ram: ramSelection,
+        gpu: gpuSelection,
         os: osSelection,
         uplink: uplinkSelection,
         setup_cost: setupCosts,
@@ -134,8 +141,13 @@ const Home = () => {
         payment_method: paymentMethod,
         comments: remarks,
       };
+
       createCheckout(jsonStringifyFormData(data, ["disks"])).then((res) => {
-        toast.success(res.data.message);
+        // toast.success("We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.", {
+        //   autoClose: false,
+        //   // className: 'bottom-10 left-1/2'
+        // });
+        setShowModal(true)
         setEmail("");
         setCustomer("");
       });
@@ -171,6 +183,7 @@ const Home = () => {
 
   const [loading, setLoading] = useState(true);
 
+  
   return (
     <div className="px-4">
        <ToastContainer
@@ -189,6 +202,14 @@ const Home = () => {
       <div className={clsx("fixed left-1/2 top-1/2", !loading && "hidden")}>
         <Spinner className="h-12 w-12 animate-spin" />
       </div>
+   {   showModal &&
+      <Modal onClose={()=> setShowModal(false)}>
+        <div className="flex items-center gap-x-4">
+        <CheckCircleIcon className="h-28 w-28 stroke-white fill-green-500"/>
+        <p className="text-lg">We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.</p>
+        </div>
+      </Modal>}
+      
       <div className={clsx(loading && "hidden")}>
         <Nav />
         <section className="w-full">
@@ -200,7 +221,7 @@ const Home = () => {
         <div className="bg-white-100 border border-sky-400 rounded-lg shadow-sm p-2 py-4">
           <div className="md:grid flex flex-col gap-y-2 md:space-y-0 md:grid-rows-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-2 gap-3">
             <div>
-              <h3 className="font-bold text-gray-600 text-lg">Kunden-eMail</h3>
+              <h3 className="font-bold text-gray-600 text-lg">Customer-eMail</h3>
               <input
                 type="text"
                 value={email}
@@ -215,7 +236,7 @@ const Home = () => {
               )}
             </div>
             <div>
-              <h3 className="font-bold text-gray-600 text-lg">Kunden-Nr</h3>
+              <h3 className="font-bold text-gray-600 text-lg">Customer-ID</h3>
               <input
                 type="text"
                 value={customer}
@@ -240,18 +261,18 @@ const Home = () => {
               )}
             </div>
             <Dropdown
-              label="Vertragsart"
+              label="Contract type"
               value={contractType}
               options={CONTRACT_TYPE_OPTIONS}
               onChange={(value) => dispatch(setContractType(value))}
             />
             <Dropdown
-              label="Bezahlmethode"
+              label="Payment method"
               value={paymentMethod}
               options={PAYMENT_METHOD_OPTIONS}
               onChange={(value) => dispatch(setPaymentMethod(value))}
             />
-            <div className="order-2 flex items-center">
+            <div className="order-2 flex items-center flex-col">
               <div
                 onClick={handleCheckout}
                 className="text-white text-lg w-full text-center cursor-pointer bg-green-500 hover:bg-green-700 font-medium rounded-lg px-5 py-5"
@@ -259,23 +280,24 @@ const Home = () => {
                 <FontAwesomeIcon icon={faCartShopping} />
                 Proceed to Checkout
               </div>
+            <p className="italic">By placing an order, you accept the <a className="text-blue-500 underline cursor-pointer" href="https://active-servers.com/agb.php">Terms and conditions</a></p>
             </div>
             <Dropdown
-              label="Rabattstufe"
+              label="Discount"
               value={discount}
               options={
                 selectedCPU?.special_offer_active
                   ? DISCOUNT_OPTIONS
                   : DISCOUNT_OPTIONS?.filter(
                       (item) => {
-                        return item.value != "special_discount"
+                        return item.value != "Special Discount"
                       }
                     )
               }
               onChange={(value) => dispatch(setDiscount(value))}
             />
             <Dropdown
-              label="Vertragsdauer"
+              label="Contract duration"
               value={contractDuration}
               options={CONTRACT_DURATION_OPTIONS}
               onChange={(value) => dispatch(setContractDuration(value))}
@@ -295,7 +317,7 @@ const Home = () => {
         </div>
 
         <h2 className="text-2xl text-sky-400 font-bold py-2">
-          Custom Setup Configuration
+          Select Dedicated Server Hardware
         </h2>
         <div className="flex flex-col gap-y-2 md:grid grid-cols-3 grid-rows-2 gap-2">
           <div>

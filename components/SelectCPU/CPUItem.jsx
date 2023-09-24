@@ -9,7 +9,7 @@ const CPUItem = ({ data, onClick, isSelected }) => {
   const cpuName = `${data.company} ${data.cpu_name}`;
   const priceDetails = ` ${data.price} € ${data.payment_frequency}`;
   const coreDetails = `${data.num_cores} Cores(${data.num_threads} Threads)`;
-  const clockDetails = `${data.clock_speed} GHz(${data.turbo_boost_freq} Turbo)`;
+  const clockDetails = `${data.clock_speed} GHz(${data.turbo_boost_freq} GHz Turbo)`;
 
   return (
     <button
@@ -18,11 +18,11 @@ const CPUItem = ({ data, onClick, isSelected }) => {
       }`}
       onClick={() => onClick(data)}
     >
-      <Image
+      <img
         src={data.imagesPath || ""}
-        width={24}
-        height={24}
-        className="w-12 h-12 object-contain"
+        width={55}
+        height={55}
+        className="object-contain"
         alt="cpu image"
       />
       <div className="flex flex-1 items-center justify-between">
@@ -67,7 +67,7 @@ const CPUItem = ({ data, onClick, isSelected }) => {
                 Sold Out
               </span>
             )}
-            <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-600/20 text-gray-600">{`${data.delivery_time} Tage Lieferzeit`}</span>
+            <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-600/20 text-gray-600">{`${data.delivery_time} Day(s) delivery time`}</span>
           </div>
         </div>
       </div>

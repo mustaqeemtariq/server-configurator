@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const api = axios.create({
-    baseURL : 'http://134.255.253.170:5000/api'
+    baseURL : 'https://active-servers.com/calc-api'
 });
 
 const getAllCPUs = async () => {

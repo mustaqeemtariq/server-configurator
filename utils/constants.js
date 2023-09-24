@@ -5,19 +5,19 @@ export const DISCOUNT_VALUES = {
     discountPercentage: 0,
   },
   FIRST_SERVER: {
-    name: "first_server",
+    name: "First server",
     discountPercentage: 5,
   },
   TEN_OR_MORE: {
-    name: "ten_or_more",
+    name: "10 or more servers",
     discountPercentage: 10,
   },
   TWENTY_OR_MORE: {
-    name: "twenty_or_more",
+    name: "20 or more servers",
     discountPercentage: 15,
   },
   SPECIAL_DISCOUNT: {
-    name: "special_discount",
+    name: "Special Discount",
     discountPercentage: 20,
   },
 };
@@ -35,16 +35,40 @@ export const STORAGE_TYPE_OPTIONS = [
 
 export const STORAGE_UNIT_OPTIONS = [
   {
-    label: "GB",
-    value: "GB"
+    label: "GB HDD",
+    value: "GB HDD"
   },
   {
-    label: "MB",
-    value: "MB"
+    label: "GB SSD",
+    value: "GB SSD"
   },
   {
-    label: "TB",
-    value: "TB"
+    label: "GB NVMe",
+    value: "GB NVMe"
+  },
+  {
+    label: "MB HDD",
+    value: "MB HDD"
+  },
+  {
+    label: "MB SSD",
+    value: "MB SSD"
+  },
+  {
+    label: "MB NVMe",
+    value: "MB NVMe"
+  },
+  {
+    label: "TB HDD",
+    value: "TB HDD"
+  },
+  {
+    label: "TB SSD",
+    value: "TB SSD"
+  },
+  {
+    label: "TB NVMe",
+    value: "TB NVMe"
   }
 ]
 

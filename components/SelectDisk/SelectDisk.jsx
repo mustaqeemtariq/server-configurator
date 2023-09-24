@@ -18,6 +18,8 @@ const SelectDisk = () => {
   const [data, setData] = useState([]);
   const [relations, setRelations] = useState([]);
   const [filteredDisk, setFilteredDisk] = useState([])
+  const [unsortedDisk, setUnsortedDisk] = useState([])
+  const [toggleValue, setToggleValue] = useState(false)
 
   useEffect(() => {
     if (relations.length === 0) {
@@ -39,31 +41,36 @@ const SelectDisk = () => {
       let filteredDisks = [...data].filter((val) =>
         !val.disk_inventory.is_premium
       );
+      setUnsortedDisk(filteredDisks)
       setFilteredDisk(filteredDisks);
+      console.log("FILTER", filteredDisk);
     } else {
       let filteredDisks = [...data].filter((val) =>
         val.disk_inventory.is_premium
       );
+
+      console.log("FILTER", data);
+      setUnsortedDisk(filteredDisks)
       setFilteredDisk(filteredDisks);
     }
   }
   useEffect(() => {
-    togglePremiumDisks();
+    togglePremiumDisks(false);
   }, [data]);
 
   useEffect(() => {
-    const sortedDisks = [...filteredDisk].sort(
-      (a, b) => parseFloat(a.price) - parseFloat(b.price)
-    );
-    setFilteredDisk(sortedDisks)
-  }, []);
+    toggleFilter(toggleValue)
+  }, [toggleValue]);
 
-  const toggleFilter = (value) => {
-    if (value) {
+  const toggleFilter = () => {
+    if (toggleValue) {
       const sortedDisks = [...filteredDisk].sort(
-        (a, b) => parseFloat(a.price) - parseFloat(b.price)
+        (a, b) => parseFloat(a.disk_inventory.price) - parseFloat(b.disk_inventory.price)
       );
-      return setFilteredDisk(sortedDisks);
+      setFilteredDisk(sortedDisks);
+    }
+    else {
+      setFilteredDisk(unsortedDisk)
     }
   };
 
@@ -73,28 +80,26 @@ const SelectDisk = () => {
   const hddLimit = cpu?.selectedCPU?.hdd_disk_limit;
   const ssdLimit = cpu?.selectedCPU?.ssd_disk_limit;
 
-  console.log("HDD", hddLimit);
-
 
   return (
     <section>
-      <div className="max-h-96 overflow-y-auto mx-auto bg-gray-50 border border-sky-400 shadow-lg rounded-lg">
+      <div className="max-h-[40rem] overflow-y-auto mx-auto bg-gray-50 border border-sky-400 shadow-lg rounded-lg">
         <div className="sticky top-0 z-40 bg-white p-4 flex justify-between items-center gap-2 text-lg font-bold">
           <h3>Select Disk</h3>
           <div className="flex items-center gap-x-2">
-            <h3 className="font-bold text-lg">Datacenter Premium Hardware</h3>
+            <h3 className="font-bold text-lg">Datacenter</h3>
             <ToggleSwitch onToggle={togglePremiumDisks} />
           </div>
         </div>
         <div className="p-4 flex items-center gap-2">
           <h3 className="font-bold text-lg">Sort by price</h3>
-          <ToggleSwitch value={true} onToggle={toggleFilter} />
+          <ToggleSwitch value={false} onToggle={(value) => setToggleValue(value)} />
         </div>
         <div className="p-4">
           <div className="mt-4 grid grid-cols-2 flex-col gap-4 gap-x-8">
-            {filteredDisk.length > 0 && filteredDisk.map((item) => (
+            {filteredDisk.length > 0 && filteredDisk.map((item, index) => (
               <DiskItem
-                key={item.ram_id}
+                key={`${index} - ${item.ram_id}`}
                 data={item.disk_inventory}
                 limit={item.disk_inventory.diskType === "SATA" ? hddLimit : ssdLimit}
               />
@@ -104,14 +109,14 @@ const SelectDisk = () => {
         <div>
           <div className="flex flex-col gap-4 mt-3 p-4">
             <DiskSelectionShowcase
-              title={`2,5"(${selectedHDDCount}/${hddLimit})`}
+              title={`SATA(${selectedHDDCount}/${hddLimit})`}
               src="/assets/images/hdd.png"
               isHDD={true}
               limit={hddLimit}
             />
             <DiskSelectionShowcase
               title={`M.2(${selectedSSDCount}/${ssdLimit})`}
-              src="/assets/images/ssd.png"
+              src="/assets/images/nvme.png"
               isHDD={false}
               limit={ssdLimit}
             />

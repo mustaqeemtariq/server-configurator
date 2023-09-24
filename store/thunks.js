@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://134.255.253.170:5000/api",
+  baseURL: "https://active-servers.com/calc-api",
 });
 
 export const getAllCPUs = createAsyncThunk(
@@ -60,7 +60,7 @@ export const filterCPUsByCompany = (allCPUs, company) => {
 };
 
 export const filterRAMsByCPU = (allRAMs, cpuID, isECC) => {
-  return allRAMs.filter((ram) => ram.cpu_id === cpuID && ram.is_ECC === isECC);
+  return allRAMs.filter((ram) => ram.cpu_id === cpuID);
 };
 
 export const filterDisksByCPU = (allDisks, cpuID, premiumDisksOnly) => {

@@ -14,7 +14,7 @@ const SelectGPU = () => {
     <section>
       <div className="max-h-96 overflow-y-auto container mx-auto bg-gray-50 border border-sky-400 shadow-lg rounded-lg">
         <div className="sticky top-0 flex text-lg bg-white font-bold p-4">
-          <h3 className="font-bold text-lg">Select GPU</h3>
+          <h3 className="font-bold text-lg">Select GPU<span class="text-lime-500"> (optional)</span></h3>
         </div>
         <div className="">
           <div className="mt-2 flex flex-col gap-4 p-4">

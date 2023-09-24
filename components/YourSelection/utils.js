@@ -10,7 +10,7 @@ const getDiskSelection = (selection, type) => {
       variant,
       data: { storage_size, storage_unit },
     } = disk;
-    return `${quantity}x ${storage_size} ${storage_unit} ${type} - ${variant} `;
+    return `${quantity}x ${storage_size} ${storage_unit} ${type} - ${disk.data.is_premium ? `${variant} - Datacenter` : variant} `;
   });
 };
 
@@ -36,7 +36,7 @@ export const getUplinkSelection = (uplink) => {
   const { selectedUplink, selectedUplinkVariant, selectedUplinkQuantity } =
     uplink;
   return selectedUplink
-    ? `${selectedUplinkQuantity}x ${selectedUplink.transfer_speed} - ${selectedUplinkVariant.label} (${selectedUplinkVariant.price} €)`
+    ? `${selectedUplinkQuantity}x ${selectedUplink.transfer_speed} - ${selectedUplinkVariant.label}` // (${selectedUplinkVariant.price} €)`
     : "-";
 };
 
@@ -98,11 +98,13 @@ const getMonthlyPaymentsForDisks = (selection) => {
 };
 
 const getMonthlyPaymentsForUplink = (uplink) => {
-  const { selectedUplinkQuantity: quantity, selectedUplinkVariant: variant } =
-    uplink;
 
-  const price = (variant && parseFloat(variant.price)) || 0;
-  return price * quantity || 0;
+  // const { selectedUplinkQuantity: quantity, selectedUplinkVariant: variant } =
+  //   uplink;
+
+  // const price = (variant && parseFloat(variant.price)) || 0;
+  return parseFloat(uplink.selectedUplink?.price) * parseFloat(uplink.selectedUplinkQuantity) + parseFloat(uplink.selectedUplinkVariant?.price) || 0
+  // return price * quantity || 0;
 };
 
 export const getMonthlyPayments = (

@@ -15,5 +15,11 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+# Build the app
+RUN npm run build
+
+# Disable telemetry
+RUN npx next telemetry disable
+
 EXPOSE 3000
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "start" ]

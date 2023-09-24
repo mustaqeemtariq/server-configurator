@@ -104,7 +104,7 @@ const InventoryItem = ({
           >
             <option value="">Choose an option to sort</option>
             {tableHeaders.map((header) => (
-              <option value={header.name}>{header.label}</option>
+              <option key={header.label} value={header.name}>{header.label}</option>
             ))}
           </select>
           <Button

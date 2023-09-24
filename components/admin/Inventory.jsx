@@ -176,6 +176,7 @@ const Inventory = () => {
         <div className="flex flex-col gap-6 bg-gray-100 min-h-[calc(100vh-60px)] py-[48px]">
           {Object.values(INVENTORY_TYPES).map((item) => (
             <div
+              key={item}
               className={`px-[16px] py-[16px] cursor-pointer w-[100%] text-center uppercase ${
                 currentInventory === item
                   ? "bg-gray-300 hover:bg-gray-300"

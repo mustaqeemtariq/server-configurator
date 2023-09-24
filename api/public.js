@@ -1,7 +1,7 @@
 import { getAuthHeaders } from "@utils/api";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://134.255.253.170:5000/api";
+axios.defaults.baseURL = "https://active-servers.com/calc-api";
 
 export const getAllCPUs = () => {
   return axios.get("/cpus");
