@@ -161,7 +161,15 @@ export const INVENTORY_TYPES = {
   ORDER: "order",
   CUSTOMER: "customer"
 };
-
+export const CUSTOMER_INVENTORY_TYPES = {
+  CPU: "cpu",
+  GPU: "gpu",
+  DISK: "disk",
+  UPLINK: "uplink",
+  RAM: "ram",
+  OS: "os",
+  ORDER: "order",
+};
 export const BOOLEAN_OPTIONS = [
   {
     value: "true",
@@ -218,5 +226,16 @@ export const ADMIN_NAVIGATION_OPTIONS = {
   CONFIG: {
     name: "config",
     label: "Config",
+  },
+};
+
+export const CUSTOMER_NAVIGATION_OPTIONS = {
+  INVENTORY: {
+    name: "inventory",
+    label: "Inventory",
+  },
+  DOCUMENTATION: {
+    name: "documentation",
+    label: "Documentation",
   },
 };

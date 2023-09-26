@@ -35,6 +35,28 @@ export const CPU_TABLE_HEADERS = [
     size: 1,
   },
 ];
+export const CUSTOMER_CPU_TABLE_HEADERS = [
+  {
+    name: "cpu_id",
+    label: "ID",
+    size: 1,
+  },
+  {
+    name: "cpu_name",
+    label: "CPU Name",
+    size: 2,
+  },
+  {
+    name: "price",
+    label: "Price",
+    size: 1,
+  },
+  {
+    name: "units_left",
+    label: "Quantity",
+    size: 1,
+  },
+];
 
 export const GPU_TABLE_HEADERS = [
   {
@@ -63,7 +85,28 @@ export const GPU_TABLE_HEADERS = [
     size: 1,
   },
 ];
-
+export const CUSTOMER_GPU_TABLE_HEADERS = [
+  {
+    name: "gpu_id",
+    label: "GPU ID",
+    size: 1,
+  },
+  {
+    name: "cpu_inventory",
+    label: "CPU Name",
+    size: 2,
+  },
+  {
+    name: "gpu_name",
+    label: "GPU Name",
+    size: 3,
+  },
+  {
+    name: "price",
+    label: "Price",
+    size: 1,
+  },
+];
 export const DISK_TABLE_HEADERS = [
   {
     name: "disk_id",
@@ -96,7 +139,18 @@ export const DISK_TABLE_HEADERS = [
     size: 1,
   },
 ];
-
+export const CUSTOMER_DISK_TABLE_HEADERS = [
+  {
+    name: "disk_id",
+    label: "ID",
+    size: 1,
+  },
+  {
+    name: "price",
+    label: "Price",
+    size: 1,
+  },
+];
 
 export const RELATION_TABLE_HEADERS = [
   {
@@ -168,6 +222,33 @@ export const RAM_TABLE_HEADERS = [
     size: 1,
   }
 ];
+export const CUSTOMER_RAM_TABLE_HEADERS = [
+  {
+    name: "ram_id",
+    label: "ID",
+    size: 1,
+  },
+  {
+    name: "cpu_inventory",
+    label: "CPU Name",
+    size: 2,
+  },
+  {
+    name: "ram_name",
+    label: "Name",
+    size: 2,
+  },
+  {
+    name: "price",
+    label: "Price",
+    size: 1,
+  },
+  {
+    name: "units_left",
+    label: "Quantity",
+    size: 1,
+  }
+];
 
 // TODO
 export const OS_TABLE_HEADERS = [
@@ -208,6 +289,18 @@ export const UPLINK_TABLE_HEADERS = [
     name: "data_unit",
     label: "Data Unit",
     size: 2
+  }
+];
+export const CUSTOMER_UPLINK_TABLE_HEADERS = [
+  {
+    name: "uplink_id",
+    label: "ID",
+    size: 2,
+  },
+  {
+    name: "transfer_speed",
+    label: "Transfer Speed",
+    size: 3,
   }
 ];
 

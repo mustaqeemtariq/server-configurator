@@ -2,7 +2,7 @@ import { createCPU, createCheckout, createDisk, createGPU, createOS, createRAM, 
 import moment from "moment";
 import { useEffect, useState } from "react";
 
-const HeaderRow = ({ headers }) => {
+const HeaderRow = ({ headers, role }) => {
   return (
     <thead>
       <tr className="flex bg-gray-300">
@@ -16,13 +16,13 @@ const HeaderRow = ({ headers }) => {
             {header.label}
           </th>
         ))}
-        {headers[0].name !== "order_id" && headers[0].name !== "customer_id" && headers[0].name !== "relation_id" && <th className={`text-center px-[24px] py-[16px]`}>Copy</th>}
+        {role !== 'Customer' && headers[0].name !== "order_id" && headers[0].name !== "customer_id" && headers[0].name !== "relation_id" && <th className={`text-center px-[24px] py-[16px]`}>Copy</th>}
       </tr>
     </thead>
   );
 };
 
-const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
+const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId, role }) => {
   const handleClick = () => {
     onClick(item);
   };
@@ -68,9 +68,10 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
 
   return (
     <tr
-      onClick={handleClick}
-      className={`flex cursor-pointer hover:bg-gray-200 ${
-        index % 2 ? "bg-gray-100" : ""
+      onClick={role !== 'Customer' ? handleClick : undefined}
+      className={`flex ${
+        index % 2 ? "bg-gray-100" : "",
+        role !== 'Customer' ? 'cursor-pointer hover:bg-gray-200' : 'cursor-default'
       }`}
     >
       {headers.map((header) => (
@@ -83,7 +84,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
             {header.name === "cpu_inventory" ? item.cpu_inventory.cpu_name : header.name === "disk_inventory" ? item.disk_inventory.diskType : header.name === "modified_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") :  header.name === "created_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") : item[header.name]?.toString()}
           </td>
       ))}
-        {headers[0].name !== "customer_id" && headers[0].name !== "order_id" && headers[0].name !== "relation_id" && <td onClick={(event) => {
+        {role !== 'Customer' && headers[0].name !== "customer_id" && headers[0].name !== "order_id" && headers[0].name !== "relation_id" && <td onClick={(event) => {
           event.stopPropagation()
           handleCopy(item)
           }} 
@@ -107,7 +108,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId }) => {
   );
 };
 
-const InventoryCategoryTable = ({ data, headers, onRowClick }) => {
+const InventoryCategoryTable = ({ data, headers, onRowClick, role }) => {
   const [items, setItems] = useState(data)
   const [maxId, setMaxId] = useState(headers[0].name === "order_id" ? data[0]?.[headers[0].name] : data[data.length-1]?.[headers[0].name])
   useEffect(() => {
@@ -116,7 +117,7 @@ const InventoryCategoryTable = ({ data, headers, onRowClick }) => {
   }, [data]);
   return (
     <table className="table-auto w-[100%] border border-gray-300">
-      <HeaderRow headers={headers} />
+      <HeaderRow headers={headers} role={role} />
 
       <tbody>
         {items.map((item, index) => (
@@ -124,7 +125,8 @@ const InventoryCategoryTable = ({ data, headers, onRowClick }) => {
             item={item}
             headers={headers}
             index={index}
-            onClick={onRowClick}
+            role={role}
+            onClick={ onRowClick}
             setItems={setItems}
             maxId={maxId}
             setMaxId={setMaxId}

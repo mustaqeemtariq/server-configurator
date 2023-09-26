@@ -17,6 +17,7 @@ const InventoryItem = ({
   create,
   edit,
   destroy,
+  role
 }) => {
   const isFirstRenderRef = useRef(true);
   const [items, setItems] = useState([]);
@@ -107,7 +108,7 @@ const InventoryItem = ({
               <option key={header.label} value={header.name}>{header.label}</option>
             ))}
           </select>
-          <Button
+      {  role !== 'Customer' &&  <Button
             variant="primary"
             size="lg"
             type="button"
@@ -115,7 +116,7 @@ const InventoryItem = ({
             onClick={() => setSelectedItem({})}
           >
             Add
-          </Button>
+          </Button>}
         </div>
       </div>
       {items && (
@@ -123,7 +124,8 @@ const InventoryItem = ({
           <InventoryCategoryTable
             headers={tableHeaders}
             data={items}
-            onRowClick={(row) => setSelectedItem(row)}
+            role={role}
+            onRowClick={role !== 'Customer' ? (row) => setSelectedItem(row) : undefined}
           />
         </div>
       )}

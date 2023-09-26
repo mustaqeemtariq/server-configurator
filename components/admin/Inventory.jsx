@@ -1,4 +1,4 @@
-import { INVENTORY_TYPES } from "@utils/constants";
+import { CUSTOMER_INVENTORY_TYPES, INVENTORY_TYPES } from "@utils/constants";
 import { useState } from "react";
 import InventoryItem from "./InventoryItem";
 import {
@@ -32,7 +32,12 @@ import {
 } from "@api/admin";
 import {
   CPU_TABLE_HEADERS,
+  CUSTOMER_CPU_TABLE_HEADERS,
+  CUSTOMER_DISK_TABLE_HEADERS,
+  CUSTOMER_GPU_TABLE_HEADERS,
+  CUSTOMER_RAM_TABLE_HEADERS,
   CUSTOMER_TABLE_HEADERS,
+  CUSTOMER_UPLINK_TABLE_HEADERS,
   DISK_TABLE_HEADERS,
   GPU_TABLE_HEADERS,
   ORDER_TABLE_HEADERS,
@@ -60,8 +65,9 @@ import {
   getAllOrders,
   getAllRAMs,
   getAllUplinks,
-  getAllRelations
+  getAllRelations,
 } from "@api/public";
+import { getCustomerCPUs, getCustomerDisks, getCustomerGPUs, getCustomerOrders, getCustomerOS, getCustomerRams, getCustomerUPlinks } from "@api/customer";
 
 const INVENTORY_TYPE_COMPONENT_MAP = {
   [INVENTORY_TYPES.CPU]: () => (
@@ -181,17 +187,88 @@ const INVENTORY_TYPE_COMPONENT_MAP = {
     />
   ),
 };
-
-const Inventory = () => {
+const CUSTOMER_INVENTORY_TYPE_COMPONENT_MAP = {
+  [CUSTOMER_INVENTORY_TYPES.CPU]: () => (
+    <InventoryItem
+      title="CPU"
+      primaryKeyName="cpu_id"
+      tableHeaders={CUSTOMER_CPU_TABLE_HEADERS}
+      jsonFields={[]}
+      getAll={getCustomerCPUs}
+      role="Customer"
+    />
+  ),
+  [CUSTOMER_INVENTORY_TYPES.GPU]: () => (
+    <InventoryItem
+      title="GPU"
+      primaryKeyName="gpu_id"
+      tableHeaders={CUSTOMER_GPU_TABLE_HEADERS}
+      jsonFields={[]}
+      getAll={getCustomerGPUs}
+      role="Customer"
+    />
+  ),
+  [CUSTOMER_INVENTORY_TYPES.DISK]: () => (
+    <InventoryItem
+      title="Disk"
+      primaryKeyName="disk_id"
+      tableHeaders={CUSTOMER_DISK_TABLE_HEADERS}
+      jsonFields={[]}
+      getAll={getCustomerDisks}
+      role="Customer"
+    />
+  ),
+  [CUSTOMER_INVENTORY_TYPES.RAM]: () => (
+    <InventoryItem
+      title="RAM"
+      primaryKeyName="ram_id"
+      tableHeaders={CUSTOMER_RAM_TABLE_HEADERS}
+      jsonFields={[]}
+      getAll={getCustomerRams}
+      role="Customer"
+    />
+  ),
+  [CUSTOMER_INVENTORY_TYPES.OS]: () => (
+    <InventoryItem
+      title="OS"
+      primaryKeyName="os_id"
+      tableHeaders={OS_TABLE_HEADERS}
+      jsonFields={["os_version"]}
+      getAll={getCustomerOS}
+      role="Customer"
+    />
+  ),
+  [CUSTOMER_INVENTORY_TYPES.UPLINK]: () => (
+    <InventoryItem
+      title="Uplink"
+      primaryKeyName="uplink_id"
+      tableHeaders={CUSTOMER_UPLINK_TABLE_HEADERS}
+      jsonFields={["data_capcity"]}
+      getAll={getCustomerUPlinks}
+      role="Customer"
+    />
+  ),
+  [CUSTOMER_INVENTORY_TYPES.ORDER]: () => (
+    <InventoryItem
+      title="Orders"
+      primaryKeyName="order_id"
+      tableHeaders={ORDER_TABLE_HEADERS}
+      jsonFields={["disks"]}
+      getAll={getCustomerOrders}
+      role="Customer"
+    />
+  ),
+};
+const Inventory = ({role}) => {
   const [currentInventory, setCurrentInventory] = useState(INVENTORY_TYPES.CPU);
 
-  const InventoryDetails = INVENTORY_TYPE_COMPONENT_MAP[currentInventory];
+  const InventoryDetails = role === 'Customer' ? CUSTOMER_INVENTORY_TYPE_COMPONENT_MAP[currentInventory] : INVENTORY_TYPE_COMPONENT_MAP[currentInventory]
 
   return (
     <div className="flex flex-row">
       <div className="w-[240px]">
         <div className="flex flex-col gap-6 bg-gray-100 min-h-[calc(100vh-60px)] py-[48px]">
-          {Object.values(INVENTORY_TYPES).map((item) => (
+          {Object.values(role === 'Customer' ? CUSTOMER_INVENTORY_TYPES :  INVENTORY_TYPES).map((item) => (
             <div
               key={item}
               className={`px-[16px] py-[16px] cursor-pointer w-[100%] text-center uppercase ${

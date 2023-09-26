@@ -143,10 +143,6 @@ const Home = () => {
       };
 
       createCheckout(jsonStringifyFormData(data, ["disks"])).then((res) => {
-        // toast.success("We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.", {
-        //   autoClose: false,
-        //   // className: 'bottom-10 left-1/2'
-        // });
         setShowModal(true)
         setEmail("");
         setCustomer("");
@@ -177,7 +173,6 @@ const Home = () => {
       Object.values(config).length > 0
     ) {
       const selectedCPU = allCPUs[0];
-      // dispatch(selectCPU(selectedCPU));
     }
   }, [allCPUs, allDisks, allRAMs, allGPUs, config]);
 
