@@ -16,7 +16,7 @@ const HeaderRow = ({ headers, role }) => {
             {header.label}
           </th>
         ))}
-        {role !== 'Customer' && headers[0].name !== "order_id" && headers[0].name !== "customer_id" && headers[0].name !== "relation_id" && <th className={`text-center px-[24px] py-[16px]`}>Copy</th>}
+        {role !== 'Customer' && headers[0].name !== "order_id" && headers[0].name !== "id" && headers[0].name !== "relation_id" && <th className={`text-center px-[24px] py-[16px]`}>Copy</th>}
       </tr>
     </thead>
   );
@@ -84,7 +84,7 @@ const Row = ({ item, headers, onClick, index, setItems, maxId, setMaxId, role })
             {header.name === "cpu_inventory" ? item.cpu_inventory.cpu_name : header.name === "disk_inventory" ? item.disk_inventory.diskType : header.name === "modified_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") :  header.name === "created_timestamp" ? moment(item[header.name]).format("MMM DD, YYYY h:mm A") : item[header.name]?.toString()}
           </td>
       ))}
-        {role !== 'Customer' && headers[0].name !== "customer_id" && headers[0].name !== "order_id" && headers[0].name !== "relation_id" && <td onClick={(event) => {
+        {role !== 'Customer' && headers[0].name !== "id" && headers[0].name !== "order_id" && headers[0].name !== "relation_id" && <td onClick={(event) => {
           event.stopPropagation()
           handleCopy(item)
           }} 
@@ -120,7 +120,7 @@ const InventoryCategoryTable = ({ data, headers, onRowClick, role }) => {
       <HeaderRow headers={headers} role={role} />
 
       <tbody>
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <Row
             item={item}
             headers={headers}

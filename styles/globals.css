@@ -18,6 +18,12 @@
   pointer-events: none;
 }
 
+ul {
+  list-style-type: disc;
+  padding-left: 18px
+}
+
+
 .main:before {
   background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
   position: absolute;

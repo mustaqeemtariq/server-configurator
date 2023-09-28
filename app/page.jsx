@@ -82,6 +82,8 @@ const Home = () => {
     monthlyPayments,
   } = useConfiguratorSelection();
 
+  console.log("CCCJKLCJ", cpuSelection);
+
   const dispatch = useDispatch();
   const [remarks, setRemarks] = useState();
   const [email, setEmail] = useState();
@@ -90,7 +92,7 @@ const Home = () => {
     email: undefined,
     customer_no: undefined,
   });
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const handleCheckout = () => {
     if (cpuSelection === "-") {
@@ -124,7 +126,7 @@ const Home = () => {
             size: d.split(" ")[1],
             unit: `${d.split(" ")[2]} ${d.split(" ")[3]}`,
             storage: d.split(" ")[4],
-            is_premium: d.includes('Datacenter') ? true : false
+            is_premium: d.includes("Datacenter") ? true : false,
           };
         }),
         customer_email: email,
@@ -143,7 +145,7 @@ const Home = () => {
       };
 
       createCheckout(jsonStringifyFormData(data, ["disks"])).then((res) => {
-        setShowModal(true)
+        setShowModal(true);
         setEmail("");
         setCustomer("");
       });
@@ -178,10 +180,9 @@ const Home = () => {
 
   const [loading, setLoading] = useState(true);
 
-  
   return (
     <div className="px-4">
-       <ToastContainer
+      <ToastContainer
         position="top-center"
         hideProgressBar={false}
         newestOnTop={false}
@@ -197,14 +198,18 @@ const Home = () => {
       <div className={clsx("fixed left-1/2 top-1/2", !loading && "hidden")}>
         <Spinner className="h-12 w-12 animate-spin" />
       </div>
-   {   showModal &&
-      <Modal onClose={()=> setShowModal(false)}>
-        <div className="flex items-center gap-x-4">
-        <CheckCircleIcon className="h-28 w-28 stroke-white fill-green-500"/>
-        <p className="text-lg">We have sent you an email with all details of your order. You will get a second email with the invoice as soon as possible.</p>
-        </div>
-      </Modal>}
-      
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <div className="flex items-center gap-x-4">
+            <CheckCircleIcon className="h-28 w-28 stroke-white fill-green-500" />
+            <p className="text-lg">
+              We have sent you an email with all details of your order. You will
+              get a second email with the invoice as soon as possible.
+            </p>
+          </div>
+        </Modal>
+      )}
+
       <div className={clsx(loading && "hidden")}>
         <Nav />
         <section className="w-full">
@@ -216,7 +221,9 @@ const Home = () => {
         <div className="bg-white-100 border border-sky-400 rounded-lg shadow-sm p-2 py-4">
           <div className="md:grid flex flex-col gap-y-2 md:space-y-0 md:grid-rows-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-2 gap-3">
             <div>
-              <h3 className="font-bold text-gray-600 text-lg">Customer-eMail</h3>
+              <h3 className="font-bold text-gray-600 text-lg">
+                Customer-eMail
+              </h3>
               <input
                 type="text"
                 value={email}
@@ -275,7 +282,15 @@ const Home = () => {
                 <FontAwesomeIcon icon={faCartShopping} />
                 Proceed to Checkout
               </div>
-            <p className="italic">By placing an order, you accept the <a className="text-blue-500 underline cursor-pointer" href="https://active-servers.com/agb.php">Terms and conditions</a></p>
+              <p className="italic">
+                By placing an order, you accept the{" "}
+                <a
+                  className="text-blue-500 underline cursor-pointer"
+                  href="https://active-servers.com/agb.php"
+                >
+                  Terms and conditions
+                </a>
+              </p>
             </div>
             <Dropdown
               label="Discount"
@@ -283,11 +298,9 @@ const Home = () => {
               options={
                 selectedCPU?.special_offer_active
                   ? DISCOUNT_OPTIONS
-                  : DISCOUNT_OPTIONS?.filter(
-                      (item) => {
-                        return item.value != "Special Discount"
-                      }
-                    )
+                  : DISCOUNT_OPTIONS?.filter((item) => {
+                      return item.value != "Special Discount";
+                    })
               }
               onChange={(value) => dispatch(setDiscount(value))}
             />

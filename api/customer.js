@@ -27,6 +27,11 @@ export const getCustomerOS = () => {
   return axios.get("/public/os", getAuthHeaders());
 };
 
-export const getCustomerOrders = (id) => {
-  return axios.get(`/public/orders/${id}`, getAuthHeaders());
+export const getCustomerOrders = () => {
+  const id = localStorage.getItem("id")
+  return axios.get(`/public/order/${id}`, getAuthHeaders())
+};
+
+export const createCustomerOrders = (data) => {
+  return axios.post(`/public/order`, data , getAuthHeaders())
 };

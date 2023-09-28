@@ -20,6 +20,10 @@ const Admin = () => {
     if (!localStorage.getItem("accessToken")) {
       router.push("/login");
     }
+    else {
+      const role = localStorage.getItem("role")
+      if (role !== "admin") router.push("/customer")
+    }
   }, []);
 
   if (typeof window === undefined) {

@@ -67,7 +67,7 @@ import {
   getAllUplinks,
   getAllRelations,
 } from "@api/public";
-import { getCustomerCPUs, getCustomerDisks, getCustomerGPUs, getCustomerOrders, getCustomerOS, getCustomerRams, getCustomerUPlinks } from "@api/customer";
+import { createCustomerOrders, getCustomerCPUs, getCustomerDisks, getCustomerGPUs, getCustomerOrders, getCustomerOS, getCustomerRams, getCustomerUPlinks } from "@api/customer";
 
 const INVENTORY_TYPE_COMPONENT_MAP = {
   [INVENTORY_TYPES.CPU]: () => (
@@ -253,8 +253,10 @@ const CUSTOMER_INVENTORY_TYPE_COMPONENT_MAP = {
       title="Orders"
       primaryKeyName="order_id"
       tableHeaders={ORDER_TABLE_HEADERS}
+      formFields={ORDER_FORM_FIELDS}
       jsonFields={["disks"]}
       getAll={getCustomerOrders}
+      create={createCustomerOrders}
       role="Customer"
     />
   ),

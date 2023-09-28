@@ -26,9 +26,9 @@ const InventoryItem = ({
   const fetchData = async () => {
     const response = await getAll();
     if (title === "Orders") {
-      setItems(response.data.reverse());
+      return setItems(response?.data?.reverse());
     }
-    setItems(response.data);
+    setItems(response?.data);
   };
 
   useEffect(() => {
@@ -108,7 +108,7 @@ const InventoryItem = ({
               <option key={header.label} value={header.name}>{header.label}</option>
             ))}
           </select>
-      {  role !== 'Customer' &&  <Button
+      {(role !== 'Customer' || title === "Orders") &&  <Button
             variant="primary"
             size="lg"
             type="button"

@@ -39,7 +39,7 @@ export const CUSTOMER_CPU_TABLE_HEADERS = [
   {
     name: "cpu_id",
     label: "ID",
-    size: 1,
+    size: 2,
   },
   {
     name: "cpu_name",
@@ -49,12 +49,12 @@ export const CUSTOMER_CPU_TABLE_HEADERS = [
   {
     name: "price",
     label: "Price",
-    size: 1,
+    size: 2,
   },
   {
     name: "units_left",
     label: "Quantity",
-    size: 1,
+    size: 2,
   },
 ];
 
@@ -94,7 +94,7 @@ export const CUSTOMER_GPU_TABLE_HEADERS = [
   {
     name: "cpu_inventory",
     label: "CPU Name",
-    size: 2,
+    size: 3,
   },
   {
     name: "gpu_name",
@@ -104,7 +104,7 @@ export const CUSTOMER_GPU_TABLE_HEADERS = [
   {
     name: "price",
     label: "Price",
-    size: 1,
+    size: 2,
   },
 ];
 export const DISK_TABLE_HEADERS = [
@@ -143,12 +143,12 @@ export const CUSTOMER_DISK_TABLE_HEADERS = [
   {
     name: "disk_id",
     label: "ID",
-    size: 1,
+    size: 4,
   },
   {
     name: "price",
     label: "Price",
-    size: 1,
+    size: 4,
   },
 ];
 
@@ -236,7 +236,7 @@ export const CUSTOMER_RAM_TABLE_HEADERS = [
   {
     name: "ram_name",
     label: "Name",
-    size: 2,
+    size: 3,
   },
   {
     name: "price",
@@ -306,7 +306,7 @@ export const CUSTOMER_UPLINK_TABLE_HEADERS = [
 
 export const CUSTOMER_TABLE_HEADERS = [
   {
-    name: "customer_id",
+    name: "id",
     label: "ID",
     size: 1,
   },
@@ -319,11 +319,6 @@ export const CUSTOMER_TABLE_HEADERS = [
     name: "email",
     label: "Email",
     size: 3,
-  },
-  {
-    name: "password",
-    label: "Password",
-    size: 3
   }
 ];
 

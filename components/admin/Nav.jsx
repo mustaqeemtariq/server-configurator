@@ -1,12 +1,15 @@
 import { ADMIN_NAVIGATION_OPTIONS, CUSTOMER_NAVIGATION_OPTIONS } from "@utils/constants";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 const Nav = ({ currentNav, setCurrentNav, role }) => {
 
   const handleLogout = () => {
     localStorage.clear()
-    window.location.href = "/login";
+    if (role === "customer") {
+      window.location.href = "/CustomerLogin";
+    }
+    else {
+      window.location.href = "/login";
+    }
   }
   return (
     <div className="flex flex-row justify-between items-center bg-sky-400 px-[48px]">

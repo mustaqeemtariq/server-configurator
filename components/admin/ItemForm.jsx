@@ -16,13 +16,22 @@ const ItemForm = ({
   if (!data) {
     return null;
   }
-  const ID = data[primaryKeyName];
+  const ID = data[primaryKeyName] ?? data.id;
 
   const isEditForm = !!Object.values(data).length;
-  const { register, handleSubmit, getValues, setValue, watch, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm({
     values: data,
-    mode: "all"
+    mode: "all",
   });
+
+  console.log("SASA", primaryKeyName);
 
   const onSubmit = (data) => {
     if (isEditForm) {
@@ -46,7 +55,7 @@ const ItemForm = ({
           {...field}
         />
       ))}
-      {isEditForm ? (
+      {isEditForm && primaryKeyName !== "customer_id" && (
         <div className="flex flex-row gap-5">
           <Button variant="primary" size="md" type="submit">
             Edit
@@ -61,7 +70,18 @@ const ItemForm = ({
             Delete
           </Button>
         </div>
-      ) : (
+      )}
+      {isEditForm && primaryKeyName === "customer_id" && (
+        <Button
+          variant="danger"
+          size="md"
+          type="button"
+          onClick={() => deleteItem(ID)}
+        >
+          Delete
+        </Button>
+      )}
+      {!isEditForm && (
         <Button variant="primary" size="md" type="submit">
           Create
         </Button>

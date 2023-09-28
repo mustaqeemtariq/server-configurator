@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Input from "@components/login/Input";
@@ -21,6 +21,11 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken")
+    if (accessToken) router.push("/customer")
+  }, [])
+
   const handleLogin = async (e) => {
     const response = await axios
       .post("http://134.255.253.170:5000/api/login/", {
@@ -37,9 +42,10 @@ const Login = () => {
       });
 
     if (response?.data?.data) {
-      const { accessToken } = response.data.data;
+      const { accessToken, id, role } = response.data.data;
       localStorage.setItem("accessToken", accessToken);
-      //   setError("");
+      localStorage.setItem("id", id)
+      localStorage.setItem("role", role ? "admin" : "customer")
       router.push("/customer");
     }
   };
